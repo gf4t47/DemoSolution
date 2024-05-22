@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Contracts", "Persistence\Repository.Contracts\Repository.Contracts.csproj", "{A62340B5-C65D-4F63-ACB8-4070B9FD2237}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Tests", "Persistence\Repository.Tests\Repository.Tests.csproj", "{43D8A018-FA71-4DE0-BCCC-226E812DAB0C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{53362055-041B-4898-8C3D-2BFF48961AD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A62340B5-C65D-4F63-ACB8-4070B9FD2237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A62340B5-C65D-4F63-ACB8-4070B9FD2237}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A62340B5-C65D-4F63-ACB8-4070B9FD2237}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A62340B5-C65D-4F63-ACB8-4070B9FD2237}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43D8A018-FA71-4DE0-BCCC-226E812DAB0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D8A018-FA71-4DE0-BCCC-226E812DAB0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D8A018-FA71-4DE0-BCCC-226E812DAB0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D8A018-FA71-4DE0-BCCC-226E812DAB0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A62340B5-C65D-4F63-ACB8-4070B9FD2237} = {53362055-041B-4898-8C3D-2BFF48961AD3}
+		{43D8A018-FA71-4DE0-BCCC-226E812DAB0C} = {53362055-041B-4898-8C3D-2BFF48961AD3}
+	EndGlobalSection
+EndGlobal
