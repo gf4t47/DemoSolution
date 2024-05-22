@@ -110,10 +110,25 @@
     <ItemGroup>
         <Compile Include="DemoTests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="RepositoryTests.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="App.config" />
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\Core\Model.Contracts\Model.Contracts.csproj">
+        <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
+        <Name>Model.Contracts</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Repository.Contracts\Repository.Contracts.csproj">
+        <Project>{a62340b5-c65d-4f63-acb8-4070b9fd2237}</Project>
+        <Name>Repository.Contracts</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Repository.Memory\Repository.Memory.csproj">
+        <Project>{9229fd61-157c-4533-96f4-4b88ac7f1363}</Project>
+        <Name>Repository.Memory</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

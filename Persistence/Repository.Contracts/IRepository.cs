@@ -2,16 +2,16 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-public interface IRepository<T>
+using Model.Contracts;
+public interface IRepository<T> where T : IEntity
 {
     Task<T> GetById(int id);
 
     Task<IEnumerable<T>> GetAll();
 
-    Task Add(T entity);
+    Task<bool> Add(T entity);
 
-    Task Update(T entity);
+    Task<bool> Update(T entity);
 
-    Task Delete(int id);
+    Task<bool> Delete(int id);
 }

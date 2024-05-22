@@ -2,6 +2,9 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=21ebdc56_002Df806_002D4ba1_002D9b8c_002D0d80f3652b95/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestAdd" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::43D8A018-FA71-4DE0-BCCC-226E812DAB0C::.NETFramework,Version=v4.8.1::Repository.Tests.DemoTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::43D8A018-FA71-4DE0-BCCC-226E812DAB0C::.NETFramework,Version=v4.8.1::Repository.Tests.RepositoryTests.TestGetById_Found&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::43D8A018-FA71-4DE0-BCCC-226E812DAB0C::.NETFramework,Version=v4.8.1::Repository.Tests.RepositoryTests.TestYield&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::43D8A018-FA71-4DE0-BCCC-226E812DAB0C::.NETFramework,Version=v4.8.1::Repository.Tests.RepositoryTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
