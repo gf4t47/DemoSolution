@@ -6,12 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model.Contracts;
+using Repository.Contracts;
 using Repository.Memory;
 [TestClass]
 public class RepositoryTests
 {
     private const int RandomDataRange = 3;
-    
+
     public record Testee(int Id, string Name) : IEntity
     {
         public int Id { get; } = Id;
@@ -51,7 +52,7 @@ public class RepositoryTests
     [DynamicData(nameof(GetByIdFound))]
     public async Task TestGetById_Found(IEnumerable<Testee> existed, int id, string expectedName)
     {
-        var repo = new MemoryRepository<Testee>(existed);
+        IRepository<Testee> repo = new MemoryRepository<Testee>(existed);
         var actual = await repo.GetById(id).ConfigureAwait(false);
         Assert.AreEqual(expectedName, actual.Name);
     }
@@ -68,12 +69,35 @@ public class RepositoryTests
             }
         }
     }
+
+    private static IEnumerable<object[]> GetAll
+    {
+        get
+        {
+            yield return [Data];
+        }
+    }
+
+    [DataTestMethod]
+    [DynamicData(nameof(GetAll))]
+    public async Task TestGetAll(IEnumerable<Testee> existed)
+    {
+        var testees = existed.ToList();
+        IRepository<Testee> repo = new MemoryRepository<Testee>(testees);
+        var list = (await repo.GetAll().ConfigureAwait(false)).ToList();
+        Assert.IsNotNull(list);
+        Assert.AreEqual(list.Count(), testees.Count);
+        foreach (var found in list.Select(actual => testees.FirstOrDefault(t => t.Id == actual.Id && t.Name == actual.Name)))
+        {
+            Assert.IsNotNull(found);
+        }
+    }
     
     [DataTestMethod]
     [DynamicData(nameof(GetByIdNotFound))]
     public async Task TestGetById_NotFound(IEnumerable<Testee> existed, int id)
     {
-        var repo = new MemoryRepository<Testee>(existed);
+        IRepository<Testee> repo = new MemoryRepository<Testee>(existed);
         await Assert.ThrowsExceptionAsync<KeyNotFoundException>(
             async () => await repo.GetById(id).ConfigureAwait(false))
             .ConfigureAwait(false);
@@ -96,7 +120,7 @@ public class RepositoryTests
     [DynamicData(nameof(TestAddSucceed))]
     public async Task TestAdd_Succeed(IEnumerable<Testee> existed, Testee newEntity)
     {
-        var repo = new MemoryRepository<Testee>(existed);
+        IRepository<Testee> repo = new MemoryRepository<Testee>(existed);
         await Assert.ThrowsExceptionAsync<KeyNotFoundException>(
                 async () => await repo.GetById(newEntity.Id).ConfigureAwait(false))
             .ConfigureAwait(false);
@@ -126,7 +150,7 @@ public class RepositoryTests
     [DynamicData(nameof(TestAddFailed))]
     public async Task TestAdd_Failed(IEnumerable<Testee> existed, Testee newEntity)
     {
-        var repo = new MemoryRepository<Testee>(existed);
+        IRepository<Testee> repo = new MemoryRepository<Testee>(existed);
         var succeed = await repo.Add(newEntity).ConfigureAwait(false);
         Assert.IsFalse(succeed);
 
@@ -151,7 +175,7 @@ public class RepositoryTests
     [DynamicData(nameof(TestUpdateSucceed))]
     public async Task TestUpdate_Succeed(IEnumerable<Testee> existed, Testee modified)
     {
-        var repo = new MemoryRepository<Testee>(existed);
+        IRepository<Testee> repo = new MemoryRepository<Testee>(existed);
         var succeed = await repo.Update(modified).ConfigureAwait(false);
         Assert.IsTrue(succeed);
 
@@ -178,7 +202,7 @@ public class RepositoryTests
     [DynamicData(nameof(TestUpdateFailed))]
     public async Task TestUpdate_Failed(IEnumerable<Testee> existed, Testee modified)
     {
-        var repo = new MemoryRepository<Testee>(existed);
+        IRepository<Testee> repo = new MemoryRepository<Testee>(existed);
         var succeed = await repo.Update(modified).ConfigureAwait(false);
         Assert.IsFalse(succeed);
 
@@ -204,7 +228,7 @@ public class RepositoryTests
     [DynamicData(nameof(TestDeleteSucceed))]
     public async Task TestDelete_Succeed(IEnumerable<Testee> existed, int toDel)
     {
-        var repo = new MemoryRepository<Testee>(existed);
+        IRepository<Testee> repo = new MemoryRepository<Testee>(existed);
         var found = await repo.GetById(toDel).ConfigureAwait(false);
         Assert.IsNotNull(found);
         
@@ -233,7 +257,7 @@ public class RepositoryTests
     [DynamicData(nameof(TestDeleteFailed))]
     public async Task TestDelete_Failed(IEnumerable<Testee> existed, int toDel)
     {
-        var repo = new MemoryRepository<Testee>(existed);
+        IRepository<Testee> repo = new MemoryRepository<Testee>(existed);
         
         await Assert.ThrowsExceptionAsync<KeyNotFoundException>(
                 async () => await repo.GetById(toDel).ConfigureAwait(false))
