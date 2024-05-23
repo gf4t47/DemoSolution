@@ -1,7 +1,6 @@
-﻿namespace Communication.Contracts;
+﻿namespace Communication;
 
 using System.Threading.Tasks;
-
 public enum ResponseType
 {
     Ack,

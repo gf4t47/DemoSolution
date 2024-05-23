@@ -11,7 +11,7 @@
         <ProjectGuid>{A08BB02E-72A8-4F36-B508-4962457358F1}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Communication.Tests</RootNamespace>
+        <RootNamespace>Communication</RootNamespace>
         <AssemblyName>Communication.Tests</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>

@@ -8,7 +8,7 @@
         <ProjectGuid>{6BF8603D-F4FA-43ED-85F8-ABF836720F2D}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Communication.Contracts</RootNamespace>
+        <RootNamespace>Communication</RootNamespace>
         <AssemblyName>Communication.Contracts</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>

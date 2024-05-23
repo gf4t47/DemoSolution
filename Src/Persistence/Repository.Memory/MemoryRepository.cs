@@ -1,11 +1,9 @@
-﻿namespace Repository.Memory;
+﻿namespace Persistence;
 
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Model.Contracts;
-using Repository.Contracts;
-
+using Core;
 public class MemoryRepository<T>(IEnumerable<T> data) : IRepository<T>
     where T : IEntity
 {

@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Memory", "Src\Pe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EFA8F50A-D283-4008-A505-78FC25ED3ED0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model.Contracts", "Src\Core\Model.Contracts\Model.Contracts.csproj", "{75C2DFC1-C298-4199-8254-3D41F91AE5C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Contracts", "Src\Core\Core.Contracts\Core.Contracts.csproj", "{75C2DFC1-C298-4199-8254-3D41F91AE5C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Communication", "Communication", "{FE77A841-2D72-47DE-BE54-5FDAFCA44BB0}"
 EndProject

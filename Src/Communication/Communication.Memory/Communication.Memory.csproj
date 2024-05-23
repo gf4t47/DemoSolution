@@ -8,7 +8,7 @@
         <ProjectGuid>{3DA29160-1824-4739-8FDA-CECA0D481FE5}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Communication.Memory</RootNamespace>
+        <RootNamespace>Communication</RootNamespace>
         <AssemblyName>Communication.Memory</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>

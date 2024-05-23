@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Demo.
-namespace Communication.Contracts;
+namespace Communication;
 
 using System.Threading.Tasks;
 public interface IMessageQuerier

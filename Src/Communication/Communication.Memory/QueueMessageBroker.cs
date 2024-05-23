@@ -1,7 +1,6 @@
-﻿namespace Communication.Memory;
+﻿namespace Communication;
 
 using System.Collections.Concurrent;
-
 using TQueueItem = (string, string);
 
 public class QueueMessageBroker

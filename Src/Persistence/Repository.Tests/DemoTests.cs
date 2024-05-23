@@ -1,7 +1,6 @@
-﻿namespace Repository.Tests;
+﻿namespace Persistence;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 [TestClass]
 public class DemoTests
 {
