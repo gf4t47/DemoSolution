@@ -1,8 +1,8 @@
 The use case will be an Online food ordering company.
-## Headquarters (Central Component)
+## Head Quarter (Central Component)
 
 ## Ordering (accept order)
 
-## Kitchen (cook the food)
+## Workshop (cook the food)
 
 ## Delivery (delivery the food)
