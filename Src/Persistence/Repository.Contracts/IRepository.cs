@@ -1,8 +1,8 @@
-﻿namespace Repository.Contracts;
+﻿namespace Persistence;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Model.Contracts;
+using Core;
 public interface IRepository<T> where T : IEntity
 {
     Task<T> GetById(int id);

@@ -1,13 +1,10 @@
-﻿namespace Communication.Tests;
+﻿namespace Communication;
 
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Communication.Contracts;
-using Communication.Memory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-
 using MessagePayload = System.Collections.Generic.IEnumerable<int>;
 [TestClass]
 public class MemoryQueueTests

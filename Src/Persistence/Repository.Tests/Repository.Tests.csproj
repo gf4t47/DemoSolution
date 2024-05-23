@@ -11,7 +11,7 @@
         <ProjectGuid>{43D8A018-FA71-4DE0-BCCC-226E812DAB0C}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Repository.Tests</RootNamespace>
+        <RootNamespace>Persistence</RootNamespace>
         <AssemblyName>Repository.Tests</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
@@ -117,9 +117,9 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\Core\Model.Contracts\Model.Contracts.csproj">
+      <ProjectReference Include="..\..\Core\Core.Contracts\Core.Contracts.csproj">
         <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
-        <Name>Model.Contracts</Name>
+        <Name>Core.Contracts</Name>
       </ProjectReference>
       <ProjectReference Include="..\Repository.Contracts\Repository.Contracts.csproj">
         <Project>{a62340b5-c65d-4f63-acb8-4070b9fd2237}</Project>

@@ -8,7 +8,7 @@
         <ProjectGuid>{9229FD61-157C-4533-96F4-4B88AC7F1363}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Repository.Memory</RootNamespace>
+        <RootNamespace>Persistence</RootNamespace>
         <AssemblyName>Repository.Memory</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
@@ -45,9 +45,9 @@
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\Core\Model.Contracts\Model.Contracts.csproj">
+      <ProjectReference Include="..\..\Core\Core.Contracts\Core.Contracts.csproj">
         <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
-        <Name>Model.Contracts</Name>
+        <Name>Core.Contracts</Name>
       </ProjectReference>
       <ProjectReference Include="..\Repository.Contracts\Repository.Contracts.csproj">
         <Project>{a62340b5-c65d-4f63-acb8-4070b9fd2237}</Project>

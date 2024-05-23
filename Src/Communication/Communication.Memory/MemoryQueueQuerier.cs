@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Demo.
-namespace Communication.Memory;
+namespace Communication;
 
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Communication.Contracts;
 public class MemoryQueueQuerier(string topic, QueueMessageBroker broker) : IMessageQuerier
 {
     /// <summary>

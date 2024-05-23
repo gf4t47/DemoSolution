@@ -1,13 +1,11 @@
-﻿namespace Repository.Tests;
+﻿namespace Persistence;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Model.Contracts;
-using Repository.Contracts;
-using Repository.Memory;
 [TestClass]
 public class RepositoryTests
 {

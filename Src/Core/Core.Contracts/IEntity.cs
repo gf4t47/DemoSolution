@@ -1,4 +1,4 @@
-﻿namespace Model.Contracts;
+﻿namespace Core;
 
 public interface IEntity
 {

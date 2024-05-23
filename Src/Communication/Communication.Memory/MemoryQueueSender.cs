@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Demo.
-namespace Communication.Memory;
+namespace Communication;
 
 using System.Text.Json;
 using System.Threading.Tasks;
-using Communication.Contracts;
 public class MemoryQueueSender(string topic, QueueMessageBroker broker) : IMessageSender
 {
     /// <summary>
