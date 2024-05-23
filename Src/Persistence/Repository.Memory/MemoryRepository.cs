@@ -1,5 +1,6 @@
 ﻿namespace Persistence;
 
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,60 +10,40 @@ public class MemoryRepository<T>(IEnumerable<T> data) : IRepository<T>
 {
 
     /// <summary>
-    /// Data list holds in memory
+    /// Thread-safe Dictionary that holds data in memory
     /// </summary>
-    private List<T> Data { get; } = data.ToList();
-
+    private ConcurrentDictionary<int, T> Data { get; } = new(data.Select(it => new KeyValuePair<int, T>(it.Id, it)));
 
     public Task<T> GetById(int id)
     {
-        var found = this.Data.FirstOrDefault(it => it.Id == id);
-        if (found is null)
+        if (this.Data.TryGetValue(id, out var found))
         {
-            throw new KeyNotFoundException($"Not found id: {id}");
+            return Task.FromResult(found);    
         }
-
-        return Task.FromResult(found);
+        
+        throw new KeyNotFoundException($"Not found id: {id}");
     }
 
     public Task<IEnumerable<T>> GetAll()
     {
-        return Task.FromResult<IEnumerable<T>>(this.Data);
+        return Task.FromResult<IEnumerable<T>>(this.Data.Values);
     }
 
     public Task<bool> Add(T entity)
     {
-        var found = this.Data.FirstOrDefault(it => it.Id == entity.Id);
-        if (found is not null)
-        {
-            return Task.FromResult(false);
-        }
-
-        this.Data.Add(entity);
-        return Task.FromResult(true);
+        return Task.FromResult(this.Data.TryAdd(entity.Id, entity));
+        
+        
     }
 
     public Task<bool> Update(T entity)
     {
-        var index = this.Data.FindIndex(it => it.Id == entity.Id);
-        if (index < 0)
-        {
-            return Task.FromResult(false);
-        }
-
-        this.Data[index] = entity;
-        return Task.FromResult(true);
+        return Task.FromResult(this.Data.TryGetValue(entity.Id, out var original) 
+            && this.Data.TryUpdate(entity.Id, entity, original));
     }
 
     public Task<bool> Delete(int id)
     {
-        var index = this.Data.FindIndex(it => it.Id == id);
-        if (index < 0)
-        {
-            return Task.FromResult(false);
-        }
-        
-        this.Data.RemoveAt(index);
-        return Task.FromResult(true);
+        return Task.FromResult(this.Data.TryRemove(id, out _));
     }
 }
