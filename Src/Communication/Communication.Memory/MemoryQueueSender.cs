@@ -21,7 +21,7 @@ public class MemoryQueueSender<T>(IOptions<MessageChannel> option, QueueMessageB
     /// </summary>
     private QueueMessageBroker Broker { get; } = broker;
 
-    public Task<PublishResponse> Send(IMessage<T> message)
+    public Task<PublishResponse> Publish(IMessage<T> message)
     {
         var headers = JsonSerializer.Serialize(message.Headers);
         var payload = JsonSerializer.Serialize(message.Payload);

@@ -14,5 +14,5 @@ public record PublishResponse(ResponseType Type)
 
 public interface IMessageSender<in T>
 {
-    Task<PublishResponse> Send(IMessage<T> message);
+    Task<PublishResponse> Publish(IMessage<T> message);
 }

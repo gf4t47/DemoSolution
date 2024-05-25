@@ -1,7 +1,14 @@
 ﻿// Copyright (c) Demo.
 namespace Communication;
 
-public record MessageChannel
+public record MessageChannel(string Topic)
 {
-    public string? Topic { get; set; }
+    private const string DefaultTopic = "default";
+
+    public MessageChannel() : this(DefaultTopic)
+    {
+        
+    }
+
+    public string Topic { get; set; } = Topic;
 }

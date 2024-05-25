@@ -42,7 +42,7 @@ public class MemoryQueueTests
         IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt, broker);
         IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt, broker);
 
-        var response = await sender.Send(msg).ConfigureAwait(false);
+        var response = await sender.Publish(msg).ConfigureAwait(false);
         Assert.AreEqual(ResponseType.Ack, response.Type);
 
         var actual = await receiver.Receive().ConfigureAwait(false);
@@ -62,7 +62,7 @@ public class MemoryQueueTests
         IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt, broker);
         IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt, broker);
 
-        var response = await sender.Send(msg).ConfigureAwait(false);
+        var response = await sender.Publish(msg).ConfigureAwait(false);
         Assert.AreEqual(ResponseType.Ack, response.Type);
 
         var first = await receiver.Receive().ConfigureAwait(false);
@@ -85,7 +85,7 @@ public class MemoryQueueTests
         IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(Options.Create(new MessageChannel{ Topic = nameof(sender) }), broker);
         IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(Options.Create(new MessageChannel{ Topic = nameof(receiver) }), broker);
 
-        var response = await sender.Send(msg).ConfigureAwait(false);
+        var response = await sender.Publish(msg).ConfigureAwait(false);
         Assert.AreEqual(ResponseType.Ack, response.Type);
 
         var actual = await receiver.Receive().ConfigureAwait(false);
@@ -112,7 +112,7 @@ public class MemoryQueueTests
 
         foreach (var msg in msgs)
         {
-            var response = await sender.Send(msg).ConfigureAwait(false);
+            var response = await sender.Publish(msg).ConfigureAwait(false);
             Assert.AreEqual(ResponseType.Ack, response.Type);
         }
 

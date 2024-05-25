@@ -14,7 +14,7 @@ public class AcceptOrderHandler(IMessageSender<OrderApproved> sender) : ICommand
     {
         var payload = new OrderApproved();
         var msg = new OrderApprovedMessage(payload);
-        var response = await this.Sender.Send(msg).ConfigureAwait(false);
+        var response = await this.Sender.Publish(msg).ConfigureAwait(false);
         return response.Type == ResponseType.Ack;
     }
 }
