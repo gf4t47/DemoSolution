@@ -20,6 +20,7 @@ public class CommandHandlerTests
         var sc = new ServiceCollection();
         sc.ConfigOrderingCommandHandler();
         sc.ConfigOrderingService();
+        sc.ConfigOrderingCommunication();
 
         this.ServiceProvider = sc.BuildServiceProvider();
     }

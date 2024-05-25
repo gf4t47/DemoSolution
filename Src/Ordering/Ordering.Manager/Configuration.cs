@@ -1,10 +1,13 @@
 ﻿// Copyright (c) Demo.
 namespace Ordering;
 
+using Communication;
 using Core.Command;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Ordering.Command;
 using Ordering.Handler;
+using Ordering.Message;
 using Ordering.Service;
 public static class Configuration
 {
@@ -24,6 +27,15 @@ public static class Configuration
     {
         sc.AddTransient<IPaymentService, MockPaymentService>();
         sc.AddTransient<ICalcPriceService, MockPriceCalculator>();
+
+        return sc;
+    }
+
+    public static IServiceCollection ConfigOrderingCommunication(this IServiceCollection sc)
+    {
+        sc.AddSingleton<QueueMessageBroker>();
+        sc.AddOptions<MessageChannel>().PostConfigure(opt => opt.Topic = "Ordering=>HeadQuarters");
+        sc.AddTransient<IMessageSender<OrderApproved>, MemoryQueueSender<OrderApproved>>();
 
         return sc;
     }

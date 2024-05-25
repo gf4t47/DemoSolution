@@ -3,19 +3,25 @@ namespace Communication;
 
 using System.Text.Json;
 using System.Threading.Tasks;
-public class MemoryQueueSender(string topic, QueueMessageBroker broker) : IMessageSender
+using Microsoft.Extensions.Options;
+public class MemoryQueueSender<T>(IOptions<MessageChannel> option, QueueMessageBroker broker) : IMessageSender<T>
 {
     /// <summary>
     /// Topic to subscribe 
     /// </summary>
-    private string Topic { get; } = topic;
+    private string Topic => this.Option.Topic;
 
+    /// <summary>
+    /// Options get from DI
+    /// </summary>
+    private MessageChannel Option { get; } = option.Value;
+    
     /// <summary>
     /// Wrap In-memory message queue
     /// </summary>
     private QueueMessageBroker Broker { get; } = broker;
 
-    public Task<PublishResponse> Send<T>(IMessage<T> message)
+    public Task<PublishResponse> Send(IMessage<T> message)
     {
         var headers = JsonSerializer.Serialize(message.Headers);
         var payload = JsonSerializer.Serialize(message.Payload);

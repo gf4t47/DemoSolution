@@ -7,6 +7,7 @@
       &lt;TestId&gt;MSTest::D9DB4E06-8F98-42CC-B6DB-A3DE9EF84DE7::.NETFramework,Version=v4.8.1::Core.DependencyInjectionTests.TestResolveDI&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;MSTest::D9DB4E06-8F98-42CC-B6DB-A3DE9EF84DE7::.NETFramework,Version=v4.8.1::Core.DependencyInjectionTests&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;MSTest::5579B762-3AAD-46D9-91EE-E56D1F0D86F1::.NETFramework,Version=v4.8.1::Ordering.CommandHandlerTests.TestExecCommand_Succeed&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;MSTest::5579B762-3AAD-46D9-91EE-E56D1F0D86F1::.NETFramework,Version=v4.8.1::Ordering.CommandHandlerTests&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
   &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String>

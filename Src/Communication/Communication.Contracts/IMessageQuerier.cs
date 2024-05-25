@@ -2,7 +2,7 @@
 namespace Communication;
 
 using System.Threading.Tasks;
-public interface IMessageQuerier
+public interface IMessageQuerier<T>
 {
-    Task<IMessage<T>?> Receive<T>();
+    Task<IMessage<T>?> Receive();
 }

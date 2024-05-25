@@ -12,7 +12,7 @@ public record PublishResponse(ResponseType Type)
     public ResponseType Type { get; } = Type;
 }
 
-public interface IMessageSender
+public interface IMessageSender<in T>
 {
-    Task<PublishResponse> Send<T>(IMessage<T> message);
+    Task<PublishResponse> Send(IMessage<T> message);
 }
