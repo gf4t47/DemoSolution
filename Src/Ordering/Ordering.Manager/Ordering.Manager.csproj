@@ -99,6 +99,14 @@
         <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
         <Name>Core.Contracts</Name>
       </ProjectReference>
+      <ProjectReference Include="..\..\Persistence\Repository.Contracts\Repository.Contracts.csproj">
+        <Project>{a62340b5-c65d-4f63-acb8-4070b9fd2237}</Project>
+        <Name>Repository.Contracts</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\..\Persistence\Repository.Memory\Repository.Memory.csproj">
+        <Project>{9229fd61-157c-4533-96f4-4b88ac7f1363}</Project>
+        <Name>Repository.Memory</Name>
+      </ProjectReference>
       <ProjectReference Include="..\Ordering.Contracts\Ordering.Contracts.csproj">
         <Project>{3e38bd1e-85a8-4164-b776-dc5369ce88ea}</Project>
         <Name>Ordering.Contracts</Name>

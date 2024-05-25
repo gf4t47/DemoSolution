@@ -2,11 +2,9 @@
 namespace Ordering.Command;
 
 using Core.Command;
-using Ordering.Model;
-
-public record RejectData(Order Order)
+public record RejectData(int OrderId)
 {
-    public Order Order { get; } = Order;
+    public int OrderId { get; } = OrderId;
 }
 
 public class RejectOrder(RejectData data) : IDemoCommand<RejectData>

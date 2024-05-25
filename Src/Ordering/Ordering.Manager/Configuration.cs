@@ -7,7 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Ordering.Command;
 using Ordering.Handler;
 using Ordering.Message;
+using Ordering.Model;
 using Ordering.Service;
+using Persistence;
 public static class Configuration
 {
     private const string OrderingToHeadQuarters = "Ordering=>HeadQuarters";
@@ -37,6 +39,14 @@ public static class Configuration
         sc.AddSingleton<QueueMessageBroker>();
         sc.AddOptions<MessageChannel>().PostConfigure(opt => opt.Topic = OrderingToHeadQuarters);
         sc.AddTransient<IMessageSender<OrderApproved>, MemoryQueueSender<OrderApproved>>();
+
+        return sc;
+    }
+
+    public static IServiceCollection ConfigOrderingPersistence(this ServiceCollection sc)
+    {
+        sc.AddSingleton<IRepository<Order>, MemoryRepository<Order>>();
+        sc.AddSingleton<IUniqueIdGenerator<Order>, MemoryRepository<Order>>();
 
         return sc;
     }

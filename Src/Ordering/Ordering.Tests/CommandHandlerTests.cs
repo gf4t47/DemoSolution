@@ -21,20 +21,20 @@ public class CommandHandlerTests
         sc.ConfigOrderingCommandHandler();
         sc.ConfigOrderingService();
         sc.ConfigOrderingCommunication();
+        sc.ConfigOrderingPersistence();
         postConfig(sc);
 
         return sc.BuildServiceProvider();
     }
 
-    private static IEnumerable<Order> Orders
+    private static IEnumerable<(Customer, ICollection<Dishes>, PaymentInfo, Address)> Submitted
     {
         get
         {
             var address = new Address("street", "LA", "CA", 91100);
             var customer = new Customer(1, "Test", address);
-            var order = new Order(1, customer, new List<Dishes>(), new PaymentInfo(), address);
-
-            yield return order;
+            
+            yield return (customer, new List<Dishes>(), new PaymentInfo(), address);
         }
     }
 
@@ -42,12 +42,12 @@ public class CommandHandlerTests
     {
         get
         {
-            foreach (var order in Orders)
+            foreach (var (customer, food, paymentInfo, address) in Submitted)
             {
-                yield return new AcceptOrder(new VerifyData(order));
+                yield return new AcceptOrder(new VerifyData(new Order(1, customer, food, paymentInfo, address)));
                 // yield return new CancelOrder(new CancelData()); // not impl
-                yield return new RejectOrder(new RejectData(order));
-                yield return new SubmitOrder(new SubmitData(order));                
+                yield return new RejectOrder(new RejectData(1));
+                yield return new SubmitOrder(new SubmitData(customer, food, paymentInfo) { Destination = address });                
             }
         }
     }
@@ -75,14 +75,17 @@ public class CommandHandlerTests
     {
         get
         {
-            return Orders.Select(o => new []{o});
+            foreach (var (customer, food, paymentInfo, address)  in Submitted)
+            {
+                yield return [customer, food, paymentInfo, address];
+            }
         }
-    } 
+    }
 
     [DataTestMethod]
     [DynamicData(nameof(TestSubmitOrder))]
     
-    public async Task TestSubmitOrderToRejectOrder_Succeed(Order order)
+    public async Task TestSubmitOrderToRejectOrder_Succeed(Customer customer, ICollection<Dishes> food, PaymentInfo paymentInfo, Address address)
     {
         var alwaysRejectPaymentServ = new Mock<IPaymentService>();
         alwaysRejectPaymentServ.Setup(serv => serv.Pay(It.IsAny<int>(), It.IsAny<PaymentInfo>())).Returns(Task.FromResult(false));
@@ -97,7 +100,7 @@ public class CommandHandlerTests
         Assert.IsNotNull(sp);
         
         var commandBus = sp.GetRequiredService<OrderingCommandBus>();
-        var submitCmd = new SubmitOrder(new SubmitData(order));
+        var submitCmd = new SubmitOrder(new SubmitData(customer, food, paymentInfo) { Destination = address });
         var ret = await commandBus.Execute(submitCmd).ConfigureAwait(false);
         Assert.IsTrue(ret);
         
@@ -106,7 +109,7 @@ public class CommandHandlerTests
 
     [DataTestMethod]
     [DynamicData(nameof(TestSubmitOrder))]
-    public async Task TestSubmitOrderToAcceptOrder_Succeed(Order order)
+    public async Task TestSubmitOrderToAcceptOrder_Succeed(Customer customer, ICollection<Dishes> food, PaymentInfo paymentInfo, Address address)
     {
         var alwaysApprovePaymentServ = new Mock<IPaymentService>();
         alwaysApprovePaymentServ.Setup(serv => serv.Pay(It.IsAny<int>(), It.IsAny<PaymentInfo>())).Returns(Task.FromResult(true));
@@ -119,7 +122,7 @@ public class CommandHandlerTests
         Assert.IsNotNull(sp);
         
         var commandBus = sp.GetRequiredService<OrderingCommandBus>();
-        var submitCmd = new SubmitOrder(new SubmitData(order));
+        var submitCmd = new SubmitOrder(new SubmitData(customer, food, paymentInfo) { Destination = address });
         var ret = await commandBus.Execute(submitCmd).ConfigureAwait(false);
         Assert.IsTrue(ret);
 

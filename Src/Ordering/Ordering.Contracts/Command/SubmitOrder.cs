@@ -1,12 +1,17 @@
 ﻿// Copyright (c) Demo.
 namespace Ordering.Command;
 
+using System.Collections.Generic;
 using Core.Command;
 using Ordering.Model;
 
-public record SubmitData(Order Order)
+public record SubmitData(Customer Customer, ICollection<Dishes> Food, PaymentInfo Payment)
 {
-    public Order Order { get; } = Order;
+    public Customer Customer{ get; } = Customer;
+    public ICollection<Dishes> Food { get; } = Food;
+    public PaymentInfo Payment { get; } = Payment;
+    
+    public Address? Destination { get; set; }
 }
 
 public class SubmitOrder(SubmitData data) : IDemoCommand<SubmitData>
