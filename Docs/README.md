@@ -23,12 +23,12 @@ Language: C# 7.3 (default version of .NET framework 4.8.1)
 `System.Text.Json`: message serialization
 
 ## Use Case
-### [Head Quarter (Central Component)](Main-Component@Head-Quarter.md)
+### [Head Quarter (Central Component)](Main-Component%20Head-Quarter.md)
 
 - Central coordinator in an Orchestration architecture.
 - Queue message forwarder.
 
-### [Ordering (accept order)](Sub-Component@Ordering.md)
+### [Ordering (accept order)](Sub-Component%20Ordering.md)
 
 - Public facing Service, Taking Order from customer (ideally via Restful API)
 	- Create `Order` entity in persistence layer.
@@ -36,13 +36,13 @@ Language: C# 7.3 (default version of .NET framework 4.8.1)
 	- Based on payment approved or not, update `Order` entity in persistence layer.
 - If payment approved, send message to **Head Quarter** for next stage.
 
-### [Workshop (cook the food)](Sub-Component@Workshop.md)
+### [Workshop (cook the food)](Sub-Component%20Workshop.md)
 
 - Kitchen facing Service.
 - Take dishes to cook via queue message from **Head Quarter**
 - Update `Order` entity in persistence layer.
 
-### [Delivery (delivery the food)](Sub-Component@Delivery.md)
+### [Delivery (delivery the food)](Sub-Component%20Delivery.md)
 
 - Rider facing Service.
 - Take `Workshop`  location via queue message from **Head Quarter** as source.
