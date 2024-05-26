@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MessagePayload = System.Collections.Generic.IEnumerable<int>;
@@ -37,13 +38,14 @@ public class MemoryQueueTests
     public async Task TestSendThenReceiveOneMessage_Succeed(IMessage<MessagePayload> msg)
     {
         var broker = new QueueMessageBroker();
-        IMessageSender sender = new MemoryQueueSender(nameof(this.TestSendThenReceiveOneMessage_Succeed), broker);
-        IMessageQuerier receiver = new MemoryQueueQuerier(nameof(this.TestSendThenReceiveOneMessage_Succeed), broker);
+        var opt = Options.Create(new MessageChannel{ Topic = nameof(this.TestSendThenReceiveOneMessage_Succeed) });
+        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt, broker);
+        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt, broker);
 
-        var response = await sender.Send(msg).ConfigureAwait(false);
+        var response = await sender.Publish(msg).ConfigureAwait(false);
         Assert.AreEqual(ResponseType.Ack, response.Type);
 
-        var actual = await receiver.Receive<MessagePayload>().ConfigureAwait(false);
+        var actual = await receiver.Receive().ConfigureAwait(false);
         Assert.IsNotNull(actual);
         Assert.AreEqual(msg.Headers.Count, actual.Headers.Count);
         Assert.AreEqual(msg.Headers["type"], actual.Headers["type"]);
@@ -56,20 +58,21 @@ public class MemoryQueueTests
     public async Task TestSendOneMessageThenRetrieveTwice_Failed(IMessage<MessagePayload> msg)
     {
         var broker = new QueueMessageBroker();
-        IMessageSender sender = new MemoryQueueSender(nameof(this.TestSendOneMessageThenRetrieveTwice_Failed), broker);
-        IMessageQuerier receiver = new MemoryQueueQuerier(nameof(this.TestSendOneMessageThenRetrieveTwice_Failed), broker);
+        var opt = Options.Create(new MessageChannel{ Topic = nameof(this.TestSendOneMessageThenRetrieveTwice_Failed) });
+        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt, broker);
+        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt, broker);
 
-        var response = await sender.Send(msg).ConfigureAwait(false);
+        var response = await sender.Publish(msg).ConfigureAwait(false);
         Assert.AreEqual(ResponseType.Ack, response.Type);
 
-        var first = await receiver.Receive<MessagePayload>().ConfigureAwait(false);
+        var first = await receiver.Receive().ConfigureAwait(false);
         Assert.IsNotNull(first);
         Assert.AreEqual(msg.Headers.Count, first.Headers.Count);
         Assert.AreEqual(msg.Headers["type"], first.Headers["type"]);
         Assert.AreEqual(msg.Payload.Count(), first.Payload.Count());
         CollectionAssert.AreEqual(msg.Payload.ToList(), first.Payload.ToList());
         
-        var second = await receiver.Receive<MessagePayload>().ConfigureAwait(false);
+        var second = await receiver.Receive().ConfigureAwait(false);
         Assert.IsNull(second);
     }
     
@@ -78,13 +81,14 @@ public class MemoryQueueTests
     public async Task TestSendRetrieveOnDiffTopic_Failed(IMessage<MessagePayload> msg)
     {
         var broker = new QueueMessageBroker();
-        IMessageSender sender = new MemoryQueueSender(nameof(sender), broker);
-        IMessageQuerier receiver = new MemoryQueueQuerier(nameof(receiver), broker);
+        
+        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(Options.Create(new MessageChannel{ Topic = nameof(sender) }), broker);
+        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(Options.Create(new MessageChannel{ Topic = nameof(receiver) }), broker);
 
-        var response = await sender.Send(msg).ConfigureAwait(false);
+        var response = await sender.Publish(msg).ConfigureAwait(false);
         Assert.AreEqual(ResponseType.Ack, response.Type);
 
-        var actual = await receiver.Receive<MessagePayload>().ConfigureAwait(false);
+        var actual = await receiver.Receive().ConfigureAwait(false);
         Assert.IsNull(actual);
     }
 
@@ -102,12 +106,13 @@ public class MemoryQueueTests
     public async Task TestSendThenReceiveMultipleMessage_Succeed(IList<IMessage<MessagePayload>> msgs)
     {
         var broker = new QueueMessageBroker();
-        IMessageSender sender = new MemoryQueueSender(nameof(this.TestSendThenReceiveMultipleMessage_Succeed), broker);
-        IMessageQuerier receiver = new MemoryQueueQuerier(nameof(this.TestSendThenReceiveMultipleMessage_Succeed), broker);
+        var opt = Options.Create(new MessageChannel { Topic = nameof(this.TestSendThenReceiveMultipleMessage_Succeed)});
+        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt, broker);
+        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt, broker);
 
         foreach (var msg in msgs)
         {
-            var response = await sender.Send(msg).ConfigureAwait(false);
+            var response = await sender.Publish(msg).ConfigureAwait(false);
             Assert.AreEqual(ResponseType.Ack, response.Type);
         }
 
@@ -115,7 +120,7 @@ public class MemoryQueueTests
         IMessage<MessagePayload>? received; 
         do
         {
-            received = await receiver.Receive<MessagePayload>().ConfigureAwait(false);
+            received = await receiver.Receive().ConfigureAwait(false);
             if (received is not null)
             {
                 receivedList.Add(received);

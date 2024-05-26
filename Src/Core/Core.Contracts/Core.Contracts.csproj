@@ -41,6 +41,10 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Command\ICommandBus.cs" />
+        <Compile Include="Command\IDemoCommand.cs" />
+        <Compile Include="Command\ICommandHandler.cs" />
+        <Compile Include="Command\IContainResult.cs" />
         <Compile Include="IEntity.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
