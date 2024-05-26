@@ -22,7 +22,7 @@ public class RepositoryTests
         return $"Name_{id}";
     }
 
-    private static IEnumerable<Testee> Data
+    private static IEnumerable<Testee> Single
     {
         get
         {
@@ -40,8 +40,8 @@ public class RepositoryTests
             var random = new Random();
             for (var i = 0; i < RandomDataRange; i++)
             {
-                var id = random.Next(0, Data.Count());
-                yield return [Data, id, IdToName(id)];       
+                var id = random.Next(0, Single.Count());
+                yield return [Single, id, IdToName(id)];       
             }
         }
     }
@@ -62,8 +62,8 @@ public class RepositoryTests
             var random = new Random();
             for (var i = 0; i < RandomDataRange; i++)
             {
-                var id = random.Next(0, Data.Count());
-                yield return [Data, id + Data.Count()];       
+                var id = random.Next(0, Single.Count());
+                yield return [Single, id + Single.Count()];       
             }
         }
     }
@@ -72,7 +72,7 @@ public class RepositoryTests
     {
         get
         {
-            yield return [Data];
+            yield return [Single];
         }
     }
 
@@ -108,8 +108,8 @@ public class RepositoryTests
             var random = new Random();
             for (var i = 0; i < RandomDataRange; i++)
             {
-                var id = random.Next(0, Data.Count()) + Data.Count();
-                yield return [Data, new Testee(id, IdToName(id))];       
+                var id = random.Next(0, Single.Count()) + Single.Count();
+                yield return [Single, new Testee(id, IdToName(id))];       
             }   
         }
     }
@@ -138,8 +138,8 @@ public class RepositoryTests
             var random = new Random();
             for (var i = 0; i < RandomDataRange; i++)
             {
-                var id = random.Next(0, Data.Count());
-                yield return [Data, new Testee(id, IdToName(id))];       
+                var id = random.Next(0, Single.Count());
+                yield return [Single, new Testee(id, IdToName(id))];       
             }
         }
     }
@@ -163,8 +163,8 @@ public class RepositoryTests
             var random = new Random();
             for (var i = 0; i < RandomDataRange; i++)
             {
-                var id = random.Next(0, Data.Count());
-                yield return [Data, new Testee(id, IdToName(id + Data.Count()))];       
+                var id = random.Next(0, Single.Count());
+                yield return [Single, new Testee(id, IdToName(id + Single.Count()))];       
             }
         }        
     }
@@ -190,8 +190,8 @@ public class RepositoryTests
             var random = new Random();
             for (var i = 0; i < RandomDataRange; i++)
             {
-                var id = random.Next(0, Data.Count()) + Data.Count();
-                yield return [Data, new Testee(id, IdToName(id))];       
+                var id = random.Next(0, Single.Count()) + Single.Count();
+                yield return [Single, new Testee(id, IdToName(id))];       
             }
         }
     }
@@ -216,8 +216,8 @@ public class RepositoryTests
             var random = new Random();
             for (var i = 0; i < RandomDataRange; i++)
             {
-                var id = random.Next(0, Data.Count());
-                yield return [Data, id];       
+                var id = random.Next(0, Single.Count());
+                yield return [Single, id];       
             }            
         }
     }
@@ -245,8 +245,8 @@ public class RepositoryTests
             var random = new Random();
             for (var i = 0; i < RandomDataRange; i++)
             {
-                var id = random.Next(0, Data.Count()) + Data.Count();
-                yield return [Data, id];       
+                var id = random.Next(0, Single.Count()) + Single.Count();
+                yield return [Single, id];       
             }
         }
     }
