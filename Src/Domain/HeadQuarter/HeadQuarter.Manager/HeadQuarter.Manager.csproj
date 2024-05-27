@@ -82,15 +82,15 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Communication\Communication.Contracts\Communication.Contracts.csproj">
+      <ProjectReference Include="..\..\..\Infrastructure\Communication\Communication.Contracts\Communication.Contracts.csproj">
         <Project>{6bf8603d-f4fa-43ed-85f8-abf836720f2d}</Project>
         <Name>Communication.Contracts</Name>
       </ProjectReference>
-      <ProjectReference Include="..\..\..\Communication\Communication.Memory\Communication.Memory.csproj">
+      <ProjectReference Include="..\..\..\Infrastructure\Communication\Communication.Memory\Communication.Memory.csproj">
         <Project>{3da29160-1824-4739-8fda-ceca0d481fe5}</Project>
         <Name>Communication.Memory</Name>
       </ProjectReference>
-      <ProjectReference Include="..\..\..\Domain\Domain.Contracts\Domain.Contracts.csproj">
+      <ProjectReference Include="..\..\Domain.Contracts\Domain.Contracts.csproj">
         <Project>{48a91882-ab1a-4683-aee0-74cb903292f2}</Project>
         <Name>Domain.Contracts</Name>
       </ProjectReference>

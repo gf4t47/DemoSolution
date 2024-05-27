@@ -147,11 +147,11 @@
         <Project>{082c67fc-44f5-4285-95ee-566a875bb707}</Project>
         <Name>HeadQuarter.Manager</Name>
       </ProjectReference>
-      <ProjectReference Include="..\..\..\Communication\Communication.Contracts\Communication.Contracts.csproj">
+      <ProjectReference Include="..\..\..\Infrastructure\Communication\Communication.Contracts\Communication.Contracts.csproj">
         <Project>{6bf8603d-f4fa-43ed-85f8-abf836720f2d}</Project>
         <Name>Communication.Contracts</Name>
       </ProjectReference>
-      <ProjectReference Include="..\..\..\Communication\Communication.Memory\Communication.Memory.csproj">
+      <ProjectReference Include="..\..\..\Infrastructure\Communication\Communication.Memory\Communication.Memory.csproj">
         <Project>{3da29160-1824-4739-8fda-ceca0d481fe5}</Project>
         <Name>Communication.Memory</Name>
       </ProjectReference>
