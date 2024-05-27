@@ -48,3 +48,12 @@ Language: C# Latest Minor Version
 - Take `Workshop`  location via queue message from **Head Quarter** as source.
 - Take `Delivery Address` location via queue message from **Head Quarter** as destination.
 - Update `Order` entity status in persistence layer.
+
+## System Overview
+
+### Inside component
+
+Inside one component, use [`command` <=> `command handler` pattern](./core/Command%20Handler%20Pattern.md) to achieve main logic flow.
+### Cross component
+
+Cross components, rely on queue message as main [communication](./infrastructure/communication.md) methodology.
