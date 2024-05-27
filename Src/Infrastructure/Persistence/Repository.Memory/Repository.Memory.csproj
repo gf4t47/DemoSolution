@@ -5,11 +5,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{75C2DFC1-C298-4199-8254-3D41F91AE5C4}</ProjectGuid>
+        <ProjectGuid>{9229FD61-157C-4533-96F4-4B88AC7F1363}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Core</RootNamespace>
-        <AssemblyName>Core.Contracts</AssemblyName>
+        <RootNamespace>Persistence</RootNamespace>
+        <AssemblyName>Repository.Memory</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>default</LangVersion>
@@ -41,13 +41,18 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Command\IDemoCommand.cs" />
-        <Compile Include="Command\ICommandHandler.cs" />
-        <Compile Include="Command\IContainResult.cs" />
-        <Compile Include="ICommandBus.cs" />
-        <Compile Include="IEntity.cs" />
-        <Compile Include="ITCommandBus.cs" />
+        <Compile Include="MemoryRepository.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\Core.Contracts\Core.Contracts.csproj">
+        <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
+        <Name>Core.Contracts</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Repository.Contracts\Repository.Contracts.csproj">
+        <Project>{a62340b5-c65d-4f63-acb8-4070b9fd2237}</Project>
+        <Name>Repository.Contracts</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

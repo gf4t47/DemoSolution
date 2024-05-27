@@ -1,13 +1,13 @@
 The use case will be an Online food ordering company.
 
-## Technique Stack
+## Tech Stack
 
 SDK: .NET Framework 4.8.1
 ```XML
 <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
 ```
 
-Language: C# 7.3 (default version of .NET framework 4.8.1)
+Language: C# Latest Minor Version
 ```XML
 <LangVersion>default</LangVersion>
 ```
@@ -19,8 +19,8 @@ Language: C# 7.3 (default version of .NET framework 4.8.1)
 
 ## Dependent Packages
 
-`Microsoft.Extensions.DependencyInjection`: Dependency Injection solution
-`System.Text.Json`: message serialization
+- `Microsoft.Extensions.DependencyInjection`: Dependency Injection solution
+- `System.Text.Json`: message serialization
 
 ## Use Case
 ### [Head Quarter (Central Component)](./domain/Main-Component%20Head-Quarter.md)

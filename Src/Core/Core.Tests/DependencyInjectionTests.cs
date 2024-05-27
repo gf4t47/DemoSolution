@@ -11,8 +11,8 @@ public class DependencyInjectionTests
     [TestMethod]
     public async Task TestResolveDI()
     {
-        var cmd1 = new Mock<IDemoCommand<string>>();
-        cmd1.SetupGet(c => c.Data).Returns("Mock string command");
+        var cmd = new Mock<IDemoCommand<string>>();
+        cmd.SetupGet(c => c.Data).Returns("Mock string command");
         
         var handler = new Mock<ICommandHandler<IDemoCommand<string>>>();
         handler.Setup(it => it.Process(It.IsAny<IDemoCommand<string>>())).Returns(Task.FromResult(true));
@@ -24,7 +24,7 @@ public class DependencyInjectionTests
         var provider = sc.BuildServiceProvider();
         var bus = provider.GetRequiredService<CommandBus>();
 
-        var actual = await bus.Execute(cmd1.Object).ConfigureAwait(false);
+        var actual = await bus.Execute(cmd.Object).ConfigureAwait(false);
         Assert.IsTrue(actual);
     }
 }

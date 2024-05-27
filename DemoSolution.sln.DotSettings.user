@@ -1,16 +1,10 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=21ebdc56_002Df806_002D4ba1_002D9b8c_002D0d80f3652b95/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestAdd" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Or&gt;&#xD;
-    &lt;Project Location="D:\Code\DemoSolution\Src\Persistence\Repository.Tests" Presentation="&amp;lt;Persistence&amp;gt;\&amp;lt;Repository.Tests&amp;gt;" /&gt;&#xD;
-    &lt;Project Location="D:\Code\DemoSolution\Src\Communication\Communication.Tests" Presentation="&amp;lt;Communication&amp;gt;\&amp;lt;Communication.Tests&amp;gt;" /&gt;&#xD;
-    &lt;TestAncestor&gt;&#xD;
-      &lt;TestId&gt;MSTest::D9DB4E06-8F98-42CC-B6DB-A3DE9EF84DE7::.NETFramework,Version=v4.8.1::Core.DependencyInjectionTests.TestResolveDI&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::D9DB4E06-8F98-42CC-B6DB-A3DE9EF84DE7::.NETFramework,Version=v4.8.1::Core.DependencyInjectionTests&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::5579B762-3AAD-46D9-91EE-E56D1F0D86F1::.NETFramework,Version=v4.8.1::Ordering.CommandHandlerTests.TestExecCommand_Succeed&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::5579B762-3AAD-46D9-91EE-E56D1F0D86F1::.NETFramework,Version=v4.8.1::Ordering.CommandHandlerTests&lt;/TestId&gt;&#xD;
-    &lt;/TestAncestor&gt;&#xD;
-  &lt;/Or&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
+	
+	
 	
 	
 	
