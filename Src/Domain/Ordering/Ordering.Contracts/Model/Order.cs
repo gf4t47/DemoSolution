@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using Core;
+using Domain.Model;
 
 public record PaymentInfo;
 

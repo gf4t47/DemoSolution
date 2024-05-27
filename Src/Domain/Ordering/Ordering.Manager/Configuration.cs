@@ -51,4 +51,10 @@ public static class Configuration
 
         return sc;
     }
+
+    public static IServiceCollection ConfigOrderingHostService(this IServiceCollection sc)
+    {
+        sc.AddHostedService<OrderingHostService>();
+        return sc;
+    }
 }

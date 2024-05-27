@@ -21,6 +21,7 @@ internal abstract class Program
         sc.ConfigOrderingService();
         sc.ConfigOrderingCommunication();
         sc.ConfigOrderingPersistence();
+        sc.ConfigOrderingHostService();
 
         return sc;
     }

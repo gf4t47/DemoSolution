@@ -4,7 +4,7 @@ namespace Ordering.Service;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Ordering.Model;
+using Domain.Model;
 public class MockPriceCalculator : ICalcPriceService
 {
     public Task<int> Calculate(IEnumerable<Dishes> ordered)

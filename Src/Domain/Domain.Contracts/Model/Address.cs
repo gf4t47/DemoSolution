@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Demo.
-namespace Ordering.Model;
+namespace Domain.Model;
 
 public record Address(string Street, string City, string State, int ZipCode)
 {
@@ -7,4 +7,9 @@ public record Address(string Street, string City, string State, int ZipCode)
     public string City { get; } = City;
     public string State { get; } = State;
     public int ZipCode { get; } = ZipCode;
+
+    public override string ToString()
+    {
+        return $"{this.Street} {this.City}, {this.State} {this.ZipCode}";
+    }
 }

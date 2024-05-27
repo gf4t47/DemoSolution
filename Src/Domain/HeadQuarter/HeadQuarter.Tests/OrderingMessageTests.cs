@@ -2,10 +2,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Communication;
 using Domain.Message;
+using Domain.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -21,8 +23,32 @@ public class OrderingMessageTests
         return sc.BuildServiceProvider();
     }
     
-    [TestMethod]
-    public async Task TestReceiveOrderingMessage_Succeed()
+    private static IEnumerable<(Customer, ICollection<Dishes>, Address)> Submitted
+    {
+        get
+        {
+            var address = new Address("street", "LA", "CA", 91100);
+            var customer = new Customer(1, "Test", address);
+            var dishes = new List<Dishes> { new("Pizza"), new("Noodles")};
+            
+            yield return (customer, dishes, address);
+        }
+    }
+    
+    private static IEnumerable<object[]> TestReceiveOrder
+    {
+        get
+        {
+            foreach (var (customer, food, address)  in Submitted)
+            {
+                yield return [customer, food, address];
+            }
+        }
+    }
+    
+    [DataTestMethod]
+    [DynamicData(nameof(TestReceiveOrder))]
+    public async Task TestReceiveOrderingMessage_Succeed(Customer customer, ICollection<Dishes> food, Address address)
     {
         var sp = Setup([], sc =>
         {
@@ -31,7 +57,7 @@ public class OrderingMessageTests
 
         var toSend = new Mock<IMessage<OrderApproved>>();
         toSend.SetupGet(msg => msg.Headers).Returns(new Dictionary<string, string>());
-        toSend.SetupGet(msg => msg.Payload).Returns(new OrderApproved());
+        toSend.SetupGet(msg => msg.Payload).Returns(new OrderApproved(customer, food, address));
         
         var sender = sp.GetRequiredService<IMessageSender<OrderApproved>>();
         var ret = await sender.Publish(toSend.Object).ConfigureAwait(false);
@@ -42,10 +68,14 @@ public class OrderingMessageTests
 
         var received = await querier.Receive().ConfigureAwait(false);
         Assert.IsNotNull(received);
+        Assert.AreEqual(customer.Id, received.Payload.Customer.Id);
+        Assert.AreEqual(address, received.Payload.DeliveryAddress);
+        CollectionAssert.AreEqual(food.ToList(), received.Payload.Food.ToList());
     }
 
-    [TestMethod]
-    public async Task TestReceiveOrderingMessage_ToDishAndDeliveryMessage()
+    [DataTestMethod]
+    [DynamicData(nameof(TestReceiveOrder))]
+    public async Task TestReceiveOrderingMessage_ToDishAndDeliveryMessage(Customer customer, ICollection<Dishes> food, Address address)
     {
         var sp = Setup([], sc =>
         {
@@ -58,17 +88,17 @@ public class OrderingMessageTests
         
         var toSend = new Mock<IMessage<OrderApproved>>();
         toSend.SetupGet(msg => msg.Headers).Returns(new Dictionary<string, string>());
-        toSend.SetupGet(msg => msg.Payload).Returns(new OrderApproved());
-
-        var sender = sp.GetRequiredService<IMessageSender<OrderApproved>>();
-        var ret = await sender.Publish(toSend.Object).ConfigureAwait(false);
-        Assert.AreEqual(ResponseType.Ack, ret.Type);
+        toSend.SetupGet(msg => msg.Payload).Returns(new OrderApproved(customer, food, address));
         
         var listener = sp.GetRequiredService<OrderingListener>();
         var cancelTokenSource = new CancellationTokenSource();
         await listener.StartAsync(cancelTokenSource.Token).ConfigureAwait(false);
+        
+        var sender = sp.GetRequiredService<IMessageSender<OrderApproved>>();
+        var ret = await sender.Publish(toSend.Object).ConfigureAwait(false);
+        Assert.AreEqual(ResponseType.Ack, ret.Type);
 
-        await Task.Delay(TimeSpan.FromSeconds(3), cancelTokenSource.Token).ConfigureAwait(false);
+        await Task.Delay(TimeSpan.FromSeconds(2), cancelTokenSource.Token).ConfigureAwait(false);
         
         var dishQuerier = sp.GetRequiredService<IMessageQuerier<DishesScheduled>>();
         var dishMsg = await dishQuerier.Receive().ConfigureAwait(false);

@@ -157,6 +157,8 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Internal\FirstBackgroundService.cs" />
+        <Compile Include="Internal\SecondBackgroundService.cs" />
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>

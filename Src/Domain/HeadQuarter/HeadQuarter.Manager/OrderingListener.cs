@@ -2,50 +2,33 @@
 namespace HeadQuarter;
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
-using Communication;
+using Communication;using Domain;
 using Domain.Message;
 using HeadQuarter.Command;
 using HeadQuarter.Internal;
 using Microsoft.Extensions.Hosting;
-public class OrderingListener(IMessageQuerier<OrderApproved> orderingReceiver, HeadQuarterCommandBus commandBus) : IHostedService
+public class OrderingListener(IMessageQuerier<OrderApproved> orderingReceiver, HeadQuarterCommandBus commandBus) : BackgroundLongRunner(TimeSpan.FromSeconds(1)), IHostedService
 {
     private IMessageQuerier<OrderApproved> OrderingReceiver { get; } = orderingReceiver;
     private HeadQuarterCommandBus CommandBus { get; } = commandBus;
 
-    public Task StartAsync(CancellationToken cancellationToken)
+    protected override async Task<bool> DoOnce(int jobCounter)
     {
-        Task.Run(() => this.DoWork(cancellationToken), cancellationToken);
-        return Task.CompletedTask;
-    }
-
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
-
-    private async Task DoWork(CancellationToken cancellationToken)
-    {
-        var count = 0;
-        while (!cancellationToken.IsCancellationRequested)
+        var msg = await this.OrderingReceiver.Receive().ConfigureAwait(false);
+        if (msg is not null)
         {
-            var msg = await this.OrderingReceiver.Receive().ConfigureAwait(false);
-            if (msg is not null)
-            {
-                Console.WriteLine($"{nameof(OrderingListener)} receive {++count} messages.");
+            var payload = msg.Payload;
+            Console.WriteLine($"{this.GetType().Name} recv: customer {payload.Customer.Id}, food: [{string.Join(",", payload.Food)}], addr: {payload.DeliveryAddress}");
                 
-                var dishes = msg.Payload.ToDishes(msg.Headers);
-                await this.CommandBus.Execute(new MakeDishes(dishes)).ConfigureAwait(false);
+            var dishes = payload.ToDishes(msg.Headers);
+            await this.CommandBus.Execute(new MakeDishes(dishes)).ConfigureAwait(false);
 
-                var delivery = msg.Payload.ToDelivery(msg.Headers);
-                await this.CommandBus.Execute(new DeliverDishes(delivery)).ConfigureAwait(false);
-            }
-            else
-            {
-                // Console.WriteLine($"{nameof(OrderingListener)} is listening...");
-                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
-            }
+            var delivery = payload.ToDelivery(msg.Headers);
+            await this.CommandBus.Execute(new DeliverDishes(delivery)).ConfigureAwait(false);
+            return true;
         }
+
+        return false;
     }
 }

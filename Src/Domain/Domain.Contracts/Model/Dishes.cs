@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Demo.
-namespace Ordering.Model;
+namespace Domain.Model;
 
 public record Dishes(string Name)
 {

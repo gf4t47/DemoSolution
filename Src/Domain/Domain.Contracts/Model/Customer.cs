@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Demo.
-namespace Ordering.Model;
+namespace Domain.Model;
 
 using Core;
 public class Customer(int id, string fullName, Address address) : IEntity

@@ -42,10 +42,20 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="MessageChannelMap.cs" />
+        <Compile Include="BackgroundLongRunner.cs" />
         <Compile Include="Message\DeliveryScheduled.cs" />
         <Compile Include="Message\DishesScheduled.cs" />
         <Compile Include="Message\OrderApproved.cs" />
+        <Compile Include="Model\Address.cs" />
+        <Compile Include="Model\Customer.cs" />
+        <Compile Include="Model\Dishes.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\Core\Core.Contracts\Core.Contracts.csproj">
+        <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
+        <Name>Core.Contracts</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Communication;
 using Core.Command;
 using Domain.Message;
+using Domain.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -33,8 +34,9 @@ public class CommandHandlerTests
         {
             var address = new Address("street", "LA", "CA", 91100);
             var customer = new Customer(1, "Test", address);
+            var dishes = new List<Dishes> { new("Pizza"), new("Noodles")};
             
-            yield return (customer, new List<Dishes>(), new PaymentInfo(), address);
+            yield return (customer, dishes, new PaymentInfo(), address);
         }
     }
 
@@ -44,7 +46,7 @@ public class CommandHandlerTests
         {
             foreach (var (customer, food, paymentInfo, address) in Submitted)
             {
-                yield return new AcceptOrder(new VerifyData(new Order(1, customer, food, paymentInfo, address)));
+                yield return new AcceptOrder(new VerifyData(customer, food, address));
                 // yield return new CancelOrder(new CancelData()); // not impl
                 yield return new RejectOrder(new RejectData(1));
                 yield return new SubmitOrder(new SubmitData(customer, food, paymentInfo) { Destination = address });                
@@ -129,5 +131,8 @@ public class CommandHandlerTests
         var receiver = sp.GetRequiredService<IMessageQuerier<OrderApproved>>();
         var msg = await receiver.Receive().ConfigureAwait(false);
         Assert.IsNotNull(msg);
+        Assert.AreEqual(customer.Id, msg.Payload.Customer.Id);
+        Assert.AreEqual(address, msg.Payload.DeliveryAddress);
+        CollectionAssert.AreEqual(food.ToList(), msg.Payload.Food.ToList());
     }
 }
