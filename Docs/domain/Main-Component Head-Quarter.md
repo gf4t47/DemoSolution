@@ -1,8 +1,10 @@
 ## Command and Handler
 ### Deliver Dishes Command
+
 1. Command triggered by [Order Approved](###order-approved-message) message.
 2. Send queue message [`DeliveryScheduled`](###delivery-scheduled-message) to [Delivery Component](./Sub-Component%20Delivery)
 ### Make Dishes Command
+
 1. Command triggered by [Order Approved](###order-approved-message) message.
 2. Send queue message [`DishesScheduled`](###dishes-scheduled-message) to [Workshop Component](./Sub-Component%20Workshop).
 
