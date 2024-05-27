@@ -3,10 +3,11 @@ namespace Ordering;
 
 using System;
 using System.Threading.Tasks;
+using Core;
 using Core.Command;
 using Microsoft.Extensions.DependencyInjection;
 using Ordering.Command;
-public class OrderingCommandBus(IServiceProvider serviceProvider)
+public class OrderingCommandBus(IServiceProvider serviceProvider) : ICommandBus
 {
     private IServiceProvider ServiceProvider { get; } = serviceProvider;
 

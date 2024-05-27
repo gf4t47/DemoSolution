@@ -3,6 +3,7 @@ namespace Ordering;
 
 using Communication;
 using Core.Command;
+using Domain;
 using Domain.Message;
 using Microsoft.Extensions.DependencyInjection;
 using Ordering.Command;
@@ -12,8 +13,6 @@ using Ordering.Service;
 using Persistence;
 public static class Configuration
 {
-    private const string OrderingToHeadQuarters = "Ordering=>HeadQuarters";
-    
     public static IServiceCollection ConfigOrderingCommandHandler(this IServiceCollection sc)
     {
         sc.AddTransient<ICommandHandler<AcceptOrder>, AcceptOrderHandler>();
@@ -37,7 +36,9 @@ public static class Configuration
     public static IServiceCollection ConfigOrderingCommunication(this IServiceCollection sc)
     {
         sc.AddSingleton<QueueMessageBroker>();
-        sc.AddOptions<MessageChannel>().PostConfigure(opt => opt.Topic = OrderingToHeadQuarters);
+
+        var (name, channel) = typeof(OrderApproved).ResolveMessageChannel();
+        sc.Configure<MessageChannel>(name, opt => opt.Topic = channel);
         sc.AddTransient<IMessageSender<OrderApproved>, MemoryQueueSender<OrderApproved>>();
 
         return sc;

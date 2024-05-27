@@ -131,6 +131,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="CommandHandlerTests.cs" />
         <Compile Include="OrderingMessageTests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
@@ -143,6 +144,14 @@
       <Analyzer Include="..\..\..\..\packages\MSTest.Analyzers.3.4.0\analyzers\dotnet\cs\MSTest.Analyzers.dll" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\Core.Contracts\Core.Contracts.csproj">
+        <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
+        <Name>Core.Contracts</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\HeadQuarter.Contracts\HeadQuarter.Contracts.csproj">
+        <Project>{e4526dbc-a9e2-48bb-ae9d-ec09a9f8874a}</Project>
+        <Name>HeadQuarter.Contracts</Name>
+      </ProjectReference>
       <ProjectReference Include="..\HeadQuarter.Manager\HeadQuarter.Manager.csproj">
         <Project>{082c67fc-44f5-4285-95ee-566a875bb707}</Project>
         <Name>HeadQuarter.Manager</Name>

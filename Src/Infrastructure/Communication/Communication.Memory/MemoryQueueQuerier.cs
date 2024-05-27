@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-public class MemoryQueueQuerier<T>(IOptions<MessageChannel> option, QueueMessageBroker broker) : IMessageQuerier<T>
+public class MemoryQueueQuerier<T>(IOptionsSnapshot<MessageChannel> option, QueueMessageBroker broker) : IMessageQuerier<T>
 {
     /// <summary>
     /// Topic to subscribe 
@@ -15,7 +15,7 @@ public class MemoryQueueQuerier<T>(IOptions<MessageChannel> option, QueueMessage
     /// <summary>
     /// Channel option from DI
     /// </summary>
-    private MessageChannel Channel { get; } = option.Value;
+    private MessageChannel Channel { get; } = option.Get(typeof(T).Name);
     
     /// <summary>
     /// Wrap In-memory message queue

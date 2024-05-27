@@ -38,6 +38,7 @@
         <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
         </Reference>
+        <Reference Include="Microsoft.CSharp" />
         <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
           <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
         </Reference>
@@ -75,6 +76,11 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Configuration.cs" />
+        <Compile Include="Handler\DeliverDishesHandler.cs" />
+        <Compile Include="Handler\MakeDishesHandler.cs" />
+        <Compile Include="HeadQuarterCommandBus.cs" />
+        <Compile Include="Message\DeliveryScheduledMessage.cs" />
+        <Compile Include="Message\DishesScheduledMessage.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
@@ -82,6 +88,10 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\Core.Contracts\Core.Contracts.csproj">
+        <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
+        <Name>Core.Contracts</Name>
+      </ProjectReference>
       <ProjectReference Include="..\..\..\Infrastructure\Communication\Communication.Contracts\Communication.Contracts.csproj">
         <Project>{6bf8603d-f4fa-43ed-85f8-abf836720f2d}</Project>
         <Name>Communication.Contracts</Name>
@@ -93,6 +103,10 @@
       <ProjectReference Include="..\..\Domain.Contracts\Domain.Contracts.csproj">
         <Project>{48a91882-ab1a-4683-aee0-74cb903292f2}</Project>
         <Name>Domain.Contracts</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\HeadQuarter.Contracts\HeadQuarter.Contracts.csproj">
+        <Project>{e4526dbc-a9e2-48bb-ae9d-ec09a9f8874a}</Project>
+        <Name>HeadQuarter.Contracts</Name>
       </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>

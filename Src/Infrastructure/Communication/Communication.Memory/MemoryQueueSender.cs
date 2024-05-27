@@ -4,7 +4,7 @@ namespace Communication;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-public class MemoryQueueSender<T>(IOptions<MessageChannel> option, QueueMessageBroker broker) : IMessageSender<T>
+public class MemoryQueueSender<T>(IOptionsSnapshot<MessageChannel> option, QueueMessageBroker broker) : IMessageSender<T>
 {
     /// <summary>
     /// Topic to subscribe 
@@ -14,7 +14,7 @@ public class MemoryQueueSender<T>(IOptions<MessageChannel> option, QueueMessageB
     /// <summary>
     /// Options get from DI
     /// </summary>
-    private MessageChannel Option { get; } = option.Value;
+    private MessageChannel Option { get; } = option.Get(typeof(T).Name);
     
     /// <summary>
     /// Wrap In-memory message queue

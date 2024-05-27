@@ -13,6 +13,7 @@ public class OrderingMessageTests
 {
     private static IServiceProvider Setup(ServiceCollection sc, Action<ServiceCollection> postConfig)
     {
+        sc.ConfigHeadQuarterCommandHandler();
         sc.ConfigHeadQuarterCommunication();
         postConfig(sc);
 

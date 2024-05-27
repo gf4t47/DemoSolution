@@ -5,15 +5,15 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{48A91882-AB1A-4683-AEE0-74CB903292F2}</ProjectGuid>
+        <ProjectGuid>{E4526DBC-A9E2-48BB-AE9D-EC09A9F8874A}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Domain</RootNamespace>
-        <AssemblyName>Domain.Contracts</AssemblyName>
+        <RootNamespace>HeadQuarter</RootNamespace>
+        <AssemblyName>HeadQuarter.Contracts</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
-        <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,11 +41,15 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="MessageChannelMap.cs" />
-        <Compile Include="Message\DeliveryScheduled.cs" />
-        <Compile Include="Message\DishesScheduled.cs" />
-        <Compile Include="Message\OrderApproved.cs" />
+        <Compile Include="Command\DeliverDishes.cs" />
+        <Compile Include="Command\MakeDishes.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\Core.Contracts\Core.Contracts.csproj">
+        <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
+        <Name>Core.Contracts</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

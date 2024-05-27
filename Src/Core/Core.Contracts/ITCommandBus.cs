@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Demo.
-namespace Core.Command;
+namespace Core;
 
 using System.Threading.Tasks;
-public interface ICommandBus
+using Core.Command;
+public interface ITCommandBus
 {
     Task<bool> Execute<TInput>(IDemoCommand<TInput> command);
 }

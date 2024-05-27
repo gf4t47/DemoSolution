@@ -38,9 +38,10 @@ public class MemoryQueueTests
     public async Task TestSendThenReceiveOneMessage_Succeed(IMessage<MessagePayload> msg)
     {
         var broker = new QueueMessageBroker();
-        var opt = Options.Create(new MessageChannel{ Topic = nameof(this.TestSendThenReceiveOneMessage_Succeed) });
-        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt, broker);
-        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt, broker);
+        var opt = new Mock<IOptionsSnapshot<MessageChannel>>();
+        opt.Setup(o => o.Get(It.IsAny<string>())).Returns(new MessageChannel{ Topic = nameof(this.TestSendThenReceiveOneMessage_Succeed) });
+        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt.Object, broker);
+        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt.Object, broker);
 
         var response = await sender.Publish(msg).ConfigureAwait(false);
         Assert.AreEqual(ResponseType.Ack, response.Type);
@@ -58,9 +59,10 @@ public class MemoryQueueTests
     public async Task TestSendOneMessageThenRetrieveTwice_Failed(IMessage<MessagePayload> msg)
     {
         var broker = new QueueMessageBroker();
-        var opt = Options.Create(new MessageChannel{ Topic = nameof(this.TestSendOneMessageThenRetrieveTwice_Failed) });
-        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt, broker);
-        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt, broker);
+        var opt = new Mock<IOptionsSnapshot<MessageChannel>>();        
+        opt.Setup(o => o.Get(It.IsAny<string>())).Returns(new MessageChannel{ Topic = nameof(this.TestSendOneMessageThenRetrieveTwice_Failed) });        
+        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt.Object, broker);
+        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt.Object, broker);
 
         var response = await sender.Publish(msg).ConfigureAwait(false);
         Assert.AreEqual(ResponseType.Ack, response.Type);
@@ -81,9 +83,15 @@ public class MemoryQueueTests
     public async Task TestSendRetrieveOnDiffTopic_Failed(IMessage<MessagePayload> msg)
     {
         var broker = new QueueMessageBroker();
+
+        var senderOpt = new Mock<IOptionsSnapshot<MessageChannel>>();
+        senderOpt.Setup(o => o.Get(It.IsAny<string>())).Returns(new MessageChannel{ Topic = nameof(senderOpt) });
+
+        var receiverOpt = new Mock<IOptionsSnapshot<MessageChannel>>();
+        receiverOpt.Setup(o => o.Get(It.IsAny<string>())).Returns(new MessageChannel{ Topic = nameof(receiverOpt) });
         
-        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(Options.Create(new MessageChannel{ Topic = nameof(sender) }), broker);
-        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(Options.Create(new MessageChannel{ Topic = nameof(receiver) }), broker);
+        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(senderOpt.Object, broker);
+        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(receiverOpt.Object, broker);
 
         var response = await sender.Publish(msg).ConfigureAwait(false);
         Assert.AreEqual(ResponseType.Ack, response.Type);
@@ -106,9 +114,11 @@ public class MemoryQueueTests
     public async Task TestSendThenReceiveMultipleMessage_Succeed(IList<IMessage<MessagePayload>> msgs)
     {
         var broker = new QueueMessageBroker();
-        var opt = Options.Create(new MessageChannel { Topic = nameof(this.TestSendThenReceiveMultipleMessage_Succeed)});
-        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt, broker);
-        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt, broker);
+        var opt = new Mock<IOptionsSnapshot<MessageChannel>>();
+        opt.Setup(o => o.Get(It.IsAny<string>())).Returns(new MessageChannel { Topic = nameof(this.TestSendThenReceiveMultipleMessage_Succeed)});
+        
+        IMessageSender<MessagePayload> sender = new MemoryQueueSender<MessagePayload>(opt.Object, broker);
+        IMessageQuerier<MessagePayload> receiver = new MemoryQueueQuerier<MessagePayload>(opt.Object, broker);
 
         foreach (var msg in msgs)
         {

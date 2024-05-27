@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Core.Command;
 using Microsoft.Extensions.DependencyInjection;
 
-public class CommandBus(IServiceProvider serviceProvider) : ICommandBus
+public class CommandBus(IServiceProvider serviceProvider) : ITCommandBus
 {
     private IServiceProvider ServiceProvider { get; } = serviceProvider;
 
