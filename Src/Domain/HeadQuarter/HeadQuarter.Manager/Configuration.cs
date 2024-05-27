@@ -45,4 +45,10 @@ public static class Configuration
 
         return sc;
     }
+
+    public static IServiceCollection ConfigHeadQuarterHostService(this IServiceCollection sc)
+    {
+        sc.AddHostedService<OrderingListener>();
+        return sc;
+    }
 }

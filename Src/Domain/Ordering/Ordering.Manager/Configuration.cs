@@ -44,11 +44,17 @@ public static class Configuration
         return sc;
     }
 
-    public static IServiceCollection ConfigOrderingPersistence(this ServiceCollection sc)
+    public static IServiceCollection ConfigOrderingPersistence(this IServiceCollection sc)
     {
         sc.AddSingleton<IRepository<Order>, MemoryRepository<Order>>();
         sc.AddSingleton<IUniqueIdGenerator<Order>, MemoryRepository<Order>>();
 
+        return sc;
+    }
+
+    public static IServiceCollection ConfigOrderingHostService(this IServiceCollection sc)
+    {
+        sc.AddHostedService<OrderingHostService>();
         return sc;
     }
 }

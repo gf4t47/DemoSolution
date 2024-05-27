@@ -51,9 +51,9 @@ Language: C# Latest Minor Version
 
 ## System Overview
 
-### Inside component
+### Inside a component
 
 Inside one component, use [`command` <=> `command handler` pattern](./core/Command%20Handler%20Pattern.md) to achieve main logic flow.
-### Cross component
+### Cross components
 
 Cross components, rely on queue message as main [communication](./infrastructure/communication.md) methodology.

@@ -3,6 +3,7 @@ namespace Ordering.Command;
 
 using System.Collections.Generic;
 using Core.Command;
+using Domain.Model;
 using Ordering.Model;
 
 public record SubmitData(Customer Customer, ICollection<Dishes> Food, PaymentInfo Payment)
