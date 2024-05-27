@@ -19,7 +19,7 @@ public class OrderingHostService(OrderingCommandBus commandBus) : BackgroundLong
         get
         {
             {
-                var address = new Address("long long bach", "LA", "CA", 91100);
+                var address = new Address("long long beach", "LA", "CA", 91100);
                 var customer = new Customer(1, "Test1", address);
                 var dishes = new List<Dishes> { new("Pizza"), new("Noodles")};
                 var order = new VerifyData(customer, dishes, address);

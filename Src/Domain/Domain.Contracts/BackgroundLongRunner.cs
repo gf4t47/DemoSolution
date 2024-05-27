@@ -28,7 +28,6 @@ public abstract class BackgroundLongRunner(TimeSpan waitTimeWhenNoJob)
             var doneOnce = await this.DoOnce(count++).ConfigureAwait(false);
             if (!doneOnce)
             {
-                // Console.WriteLine($"{nameof(OrderingListener)} is listening...");
                 await Task.Delay(this.WaitTimeWhenNoJob, cancellationToken).ConfigureAwait(false);                
             }
         }
