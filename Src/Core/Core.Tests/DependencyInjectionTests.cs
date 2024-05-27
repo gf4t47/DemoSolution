@@ -19,10 +19,10 @@ public class DependencyInjectionTests
         
         var sc = new ServiceCollection();
         sc.AddTransient<ICommandHandler<IDemoCommand<string>>>(_ => handler.Object);
-        sc.AddSingleton<CommandBus>();
+        sc.AddSingleton<ICommandBusT, CommandBus>();
 
         var provider = sc.BuildServiceProvider();
-        var bus = provider.GetRequiredService<CommandBus>();
+        var bus = provider.GetRequiredService<ICommandBusT>();
 
         var actual = await bus.Execute(cmd.Object).ConfigureAwait(false);
         Assert.IsTrue(actual);

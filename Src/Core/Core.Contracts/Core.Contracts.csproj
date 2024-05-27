@@ -46,7 +46,7 @@
         <Compile Include="Command\IContainResult.cs" />
         <Compile Include="ICommandBus.cs" />
         <Compile Include="IEntity.cs" />
-        <Compile Include="ITCommandBus.cs" />
+        <Compile Include="ICommandBusT.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
