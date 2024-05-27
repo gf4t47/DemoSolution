@@ -10,11 +10,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{5579B762-3AAD-46D9-91EE-E56D1F0D86F1}</ProjectGuid>
+        <ProjectGuid>{7394CBCE-A0F3-4E79-B109-B00EC9AD3AFC}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Ordering</RootNamespace>
-        <AssemblyName>Ordering.Tests</AssemblyName>
+        <RootNamespace>HeadQuarter</RootNamespace>
+        <AssemblyName>HeadQuarter.Tests</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>default</LangVersion>
@@ -131,7 +131,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="CommandHandlerTests.cs" />
+        <Compile Include="OrderingMessageTests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
@@ -143,6 +143,10 @@
       <Analyzer Include="..\..\..\..\packages\MSTest.Analyzers.3.4.0\analyzers\dotnet\cs\MSTest.Analyzers.dll" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\HeadQuarter.Manager\HeadQuarter.Manager.csproj">
+        <Project>{082c67fc-44f5-4285-95ee-566a875bb707}</Project>
+        <Name>HeadQuarter.Manager</Name>
+      </ProjectReference>
       <ProjectReference Include="..\..\..\Communication\Communication.Contracts\Communication.Contracts.csproj">
         <Project>{6bf8603d-f4fa-43ed-85f8-abf836720f2d}</Project>
         <Name>Communication.Contracts</Name>
@@ -151,21 +155,9 @@
         <Project>{3da29160-1824-4739-8fda-ceca0d481fe5}</Project>
         <Name>Communication.Memory</Name>
       </ProjectReference>
-      <ProjectReference Include="..\..\..\Core\Core.Contracts\Core.Contracts.csproj">
-        <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
-        <Name>Core.Contracts</Name>
-      </ProjectReference>
       <ProjectReference Include="..\..\Domain.Contracts\Domain.Contracts.csproj">
         <Project>{48a91882-ab1a-4683-aee0-74cb903292f2}</Project>
         <Name>Domain.Contracts</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\Ordering.Contracts\Ordering.Contracts.csproj">
-        <Project>{3e38bd1e-85a8-4164-b776-dc5369ce88ea}</Project>
-        <Name>Ordering.Contracts</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\Ordering.Manager\Ordering.Manager.csproj">
-        <Project>{080f9c0f-efd1-450c-b418-bbd8b668a70f}</Project>
-        <Name>Ordering.Manager</Name>
       </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -184,10 +176,10 @@
       <Error Condition="!Exists('..\..\..\..\packages\MSTest.TestAdapter.3.4.0\build\net462\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\MSTest.TestAdapter.3.4.0\build\net462\MSTest.TestAdapter.props'))" />
       <Error Condition="!Exists('..\..\..\..\packages\MSTest.TestAdapter.3.4.0\build\net462\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\MSTest.TestAdapter.3.4.0\build\net462\MSTest.TestAdapter.targets'))" />
     </Target>
-    <Import Project="..\..\..\..\..\packages\Microsoft.CodeCoverage.17.10.0\build\netstandard2.0\Microsoft.CodeCoverage.targets" Condition="Exists('..\..\..\..\..\packages\Microsoft.CodeCoverage.17.10.0\build\netstandard2.0\Microsoft.CodeCoverage.targets')" />
-    <Import Project="..\..\..\..\..\packages\Microsoft.NET.Test.Sdk.17.10.0\build\net462\Microsoft.NET.Test.Sdk.targets" Condition="Exists('..\..\..\..\..\packages\Microsoft.NET.Test.Sdk.17.10.0\build\net462\Microsoft.NET.Test.Sdk.targets')" />
-    <Import Project="..\..\..\..\..\packages\Microsoft.Testing.Platform.MSBuild.1.2.1\build\netstandard2.0\Microsoft.Testing.Platform.MSBuild.targets" Condition="Exists('..\..\..\..\..\packages\Microsoft.Testing.Platform.MSBuild.1.2.1\build\netstandard2.0\Microsoft.Testing.Platform.MSBuild.targets')" />
-    <Import Project="..\..\..\..\..\packages\MSTest.TestAdapter.3.4.0\build\net462\MSTest.TestAdapter.targets" Condition="Exists('..\..\..\..\..\packages\MSTest.TestAdapter.3.4.0\build\net462\MSTest.TestAdapter.targets')" />
+    <Import Project="..\..\..\..\packages\Microsoft.CodeCoverage.17.10.0\build\netstandard2.0\Microsoft.CodeCoverage.targets" Condition="Exists('..\..\..\..\packages\Microsoft.CodeCoverage.17.10.0\build\netstandard2.0\Microsoft.CodeCoverage.targets')" />
+    <Import Project="..\..\..\..\packages\Microsoft.NET.Test.Sdk.17.10.0\build\net462\Microsoft.NET.Test.Sdk.targets" Condition="Exists('..\..\..\..\packages\Microsoft.NET.Test.Sdk.17.10.0\build\net462\Microsoft.NET.Test.Sdk.targets')" />
+    <Import Project="..\..\..\..\packages\Microsoft.Testing.Platform.MSBuild.1.2.1\build\netstandard2.0\Microsoft.Testing.Platform.MSBuild.targets" Condition="Exists('..\..\..\..\packages\Microsoft.Testing.Platform.MSBuild.1.2.1\build\netstandard2.0\Microsoft.Testing.Platform.MSBuild.targets')" />
+    <Import Project="..\..\..\..\packages\MSTest.TestAdapter.3.4.0\build\net462\MSTest.TestAdapter.targets" Condition="Exists('..\..\..\..\packages\MSTest.TestAdapter.3.4.0\build\net462\MSTest.TestAdapter.targets')" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">

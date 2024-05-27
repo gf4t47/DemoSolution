@@ -26,7 +26,7 @@ public class MemoryQueueQuerier<T>(IOptions<MessageChannel> option, QueueMessage
     {
         if (this.Broker.TryDequeue(this.Topic, out var result))
         {
-            var header = JsonSerializer.Deserialize<IDictionary<string, string>>(result.Item1)!;
+            var header = JsonSerializer.Deserialize<IDictionary<string, string>>(result.Item1) ?? new Dictionary<string, string>();
             var payload = JsonSerializer.Deserialize<T>(result.Item2)!;
             var msg = new JsonMessage<T>(payload);
             foreach (var kvp in header)

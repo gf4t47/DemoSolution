@@ -4,6 +4,7 @@ namespace Ordering.Handler;
 using System.Threading.Tasks;
 using Communication;
 using Core.Command;
+using Domain.Message;
 using Ordering.Command;
 using Ordering.Message;
 public class AcceptOrderHandler(IMessageSender<OrderApproved> sender) : ICommandHandler<AcceptOrder>

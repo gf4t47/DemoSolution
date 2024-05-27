@@ -2,7 +2,6 @@
 namespace Ordering.Message;
 
 using Communication;
-
-public record OrderApproved();
+using Domain.Message;
 
 public class OrderApprovedMessage(OrderApproved payload) : JsonMessage<OrderApproved>(payload);

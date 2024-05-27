@@ -3,10 +3,10 @@ namespace Ordering;
 
 using Communication;
 using Core.Command;
+using Domain.Message;
 using Microsoft.Extensions.DependencyInjection;
 using Ordering.Command;
 using Ordering.Handler;
-using Ordering.Message;
 using Ordering.Model;
 using Ordering.Service;
 using Persistence;

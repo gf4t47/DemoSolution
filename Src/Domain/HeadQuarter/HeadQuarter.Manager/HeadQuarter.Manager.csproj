@@ -5,11 +5,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{080F9C0F-EFD1-450C-B418-BBD8B668A70F}</ProjectGuid>
+        <ProjectGuid>{082C67FC-44F5-4285-95EE-566A875BB707}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Ordering</RootNamespace>
-        <AssemblyName>Ordering.Manager</AssemblyName>
+        <RootNamespace>HeadQuarter</RootNamespace>
+        <AssemblyName>HeadQuarter.Manager</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>default</LangVersion>
@@ -38,7 +38,6 @@
         <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
         </Reference>
-        <Reference Include="Microsoft.CSharp" />
         <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
           <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
         </Reference>
@@ -76,15 +75,11 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Configuration.cs" />
-        <Compile Include="Handler\AcceptOrderHandler.cs" />
-        <Compile Include="Handler\CancelOrderHandler.cs" />
-        <Compile Include="Handler\RejectOrderHandler.cs" />
-        <Compile Include="Handler\SubmitOrderHandler.cs" />
-        <Compile Include="Message\OrderApproved.cs" />
-        <Compile Include="OrderingCommandBus.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="Service\MockPaymentService.cs" />
-        <Compile Include="Service\MockPriceCalculator.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="App.config" />
+      <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\..\Communication\Communication.Contracts\Communication.Contracts.csproj">
@@ -95,30 +90,10 @@
         <Project>{3da29160-1824-4739-8fda-ceca0d481fe5}</Project>
         <Name>Communication.Memory</Name>
       </ProjectReference>
-      <ProjectReference Include="..\..\..\Core\Core.Contracts\Core.Contracts.csproj">
-        <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
-        <Name>Core.Contracts</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\..\..\Persistence\Repository.Contracts\Repository.Contracts.csproj">
-        <Project>{a62340b5-c65d-4f63-acb8-4070b9fd2237}</Project>
-        <Name>Repository.Contracts</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\..\..\Persistence\Repository.Memory\Repository.Memory.csproj">
-        <Project>{9229fd61-157c-4533-96f4-4b88ac7f1363}</Project>
-        <Name>Repository.Memory</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\..\Domain.Contracts\Domain.Contracts.csproj">
+      <ProjectReference Include="..\..\..\Domain\Domain.Contracts\Domain.Contracts.csproj">
         <Project>{48a91882-ab1a-4683-aee0-74cb903292f2}</Project>
         <Name>Domain.Contracts</Name>
       </ProjectReference>
-      <ProjectReference Include="..\Ordering.Contracts\Ordering.Contracts.csproj">
-        <Project>{3e38bd1e-85a8-4164-b776-dc5369ce88ea}</Project>
-        <Name>Ordering.Contracts</Name>
-      </ProjectReference>
-    </ItemGroup>
-    <ItemGroup>
-      <None Include="App.config" />
-      <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

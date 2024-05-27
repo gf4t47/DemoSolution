@@ -6,11 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Communication;
 using Core.Command;
+using Domain.Message;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ordering.Command;
-using Ordering.Message;
 using Ordering.Model;
 using Ordering.Service;
 [TestClass]
