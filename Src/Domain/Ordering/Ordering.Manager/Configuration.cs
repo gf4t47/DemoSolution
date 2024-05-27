@@ -44,7 +44,7 @@ public static class Configuration
         return sc;
     }
 
-    public static IServiceCollection ConfigOrderingPersistence(this ServiceCollection sc)
+    public static IServiceCollection ConfigOrderingPersistence(this IServiceCollection sc)
     {
         sc.AddSingleton<IRepository<Order>, MemoryRepository<Order>>();
         sc.AddSingleton<IUniqueIdGenerator<Order>, MemoryRepository<Order>>();

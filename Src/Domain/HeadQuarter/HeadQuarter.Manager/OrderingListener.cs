@@ -33,6 +33,8 @@ public class OrderingListener(IMessageQuerier<OrderApproved> orderingReceiver, H
             var msg = await this.OrderingReceiver.Receive().ConfigureAwait(false);
             if (msg is not null)
             {
+                Console.WriteLine($"{nameof(OrderingListener)} receive {++count} messages.");
+                
                 var dishes = msg.Payload.ToDishes(msg.Headers);
                 await this.CommandBus.Execute(new MakeDishes(dishes)).ConfigureAwait(false);
 
@@ -41,11 +43,9 @@ public class OrderingListener(IMessageQuerier<OrderApproved> orderingReceiver, H
             }
             else
             {
-                Console.WriteLine($"{nameof(OrderingListener)} is listening...{count}");
+                // Console.WriteLine($"{nameof(OrderingListener)} is listening...");
                 await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
             }
-
-            count++;
         }
     }
 }
