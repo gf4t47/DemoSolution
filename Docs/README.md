@@ -2,7 +2,7 @@ The use case will be an Online food ordering company.
 ## Demo
 
 [`HeadQuarter.Console`](../Src/HeadQuarter.Console/Program.cs) is the entry point console executable for demo purpose.
-[OrderingHostService](../Src/Domain/Ordering/Ordering.Manager/OrderingHostService.cs) submits 3 mock orders at the beginning of the program running stage.
+[`OrderingHostService`](../Src/Domain/Ordering/Ordering.Manager/OrderingHostService.cs) submits 3 mock orders at the beginning of the program running stage.
 ## Tech Stack
 
 SDK: .NET Framework 4.8.1
