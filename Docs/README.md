@@ -62,4 +62,4 @@ To simplify the use case to achieve MVP asap, here are some constrains:
 Inside one component, use [`command` <=> `command handler` pattern](./core/Command%20Handler%20Pattern.md) to achieve main logic flow.
 ### Cross components
 
-Cross components, rely on queue message as main [communication](./infrastructure/communication.md) methodology.
+Cross components, rely on queue message as main [Communication](./infrastructure/Communication.md) methodology.
