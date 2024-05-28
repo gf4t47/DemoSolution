@@ -20,13 +20,13 @@ public class MakeDeliveryHandler(IMessageSender<DeliveryCompleted> headQuarterSe
     public async Task<bool> Process(MakeDelivery command)
     {
         var data = command.Data;
-        var address = await this.UpdateEntity(data.OrderId).ConfigureAwait(false);
+        var customerAddress = await this.UpdateEntity(data.OrderId).ConfigureAwait(false);
         
-        var payload = new DeliveryCompleted(data.OrderId, data.Customer, address);
+        var payload = new DeliveryCompleted(data.OrderId, data.Customer, customerAddress);
         var msg = new DeliveryCompletedMessage(payload);
         var response = await this.HeadQuarterSender.Publish(msg).ConfigureAwait(false);
 
-        Console.WriteLine($"{this.GetType().FullName} sent: {payload.Customer.FullName}@{data.OrderId} => {address}");        
+        Console.WriteLine($"{this.GetType().FullName} sent: {payload.Customer.FullName}@{data.OrderId} {data.ShopAddress} => {customerAddress}");        
         return response.Type == ResponseType.Ack;
     }
 
