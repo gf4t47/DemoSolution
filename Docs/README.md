@@ -1,5 +1,4 @@
 The use case will be an Online food ordering company.
-
 ## Tech Stack
 
 SDK: .NET Framework 4.8.1
@@ -23,6 +22,10 @@ Language: C# Latest Minor Version
 - `System.Text.Json`: message serialization
 
 ## Use Case
+
+To simplify the use case to achieve MVP asap, here are some constrains:
+1. immediate order only, no schedule support yet to NOT introduce the complexity of time.
+2. Cancel a submitted order is NOT implemented.
 ### [Head Quarter (Central Component)](./domain/Main-Component%20Head-Quarter.md)
 
 - Central coordinator in an Orchestration architecture.
