@@ -17,8 +17,8 @@ public class HeadQuarterListener(IMessageQuerier<DeliveryScheduled> deliveryRece
         if (msg is not null)
         {
             var payload = msg.Payload;
-            
             Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.Customer.Id}, {payload.DeliveryAddress}");
+            
             return true;
         }
 

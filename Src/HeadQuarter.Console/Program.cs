@@ -37,6 +37,7 @@ internal abstract class Program
 
     private static IServiceCollection ConfigWorkshop(IServiceCollection sc)
     {
+        sc.ConfigWorkshopCommandHandler();
         sc.ConfigWorkshopCommunication();
         sc.ConfigWorkshopHostService();
 

@@ -10,7 +10,9 @@ public static class MessageChannelMap
     {
         [nameof(OrderApproved)] = "Ordering=>HeadQuarters",
         [nameof(DishesScheduled)] = "HeadQuarters=>Workshop",
-        [nameof(DeliveryScheduled)] = "HeadQuarters=>Delivery"
+        [nameof(DeliveryScheduled)] = "HeadQuarters=>Delivery",
+        [nameof(DishesReady)] = "Workshop=>Delivery",
+        [nameof(DeliveryCompleted)] = "Delivery=>HeadQuarters"
     };
 
     public static (string, string) ResolveMessageChannel(this Type payloadType)
