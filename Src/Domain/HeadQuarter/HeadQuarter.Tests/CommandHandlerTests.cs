@@ -2,9 +2,11 @@
 namespace HeadQuarter;
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Communication;
 using Domain.Message;
+using Domain.Model;
 using HeadQuarter.Command;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -20,9 +22,33 @@ public class CommandHandlerTests
 
         return sc.BuildServiceProvider();
     }
+    
+    private static IEnumerable<(Customer, ICollection<Dishes>, Address)> Submitted
+    {
+        get
+        {
+            var address = new Address("street", "LA", "CA", 91100);
+            var customer = new Customer(1, "Test", address);
+            var dishes = new List<Dishes> { new("Pizza"), new("Noodles")};
+            
+            yield return (customer, dishes, address);
+        }
+    }
+    
+    private static IEnumerable<object[]> TestReceiveOrder
+    {
+        get
+        {
+            foreach (var (customer, food, address)  in Submitted)
+            {
+                yield return [customer, food, address];
+            }
+        }
+    }
 
-    [TestMethod]
-    public async Task TestMakeDishes_Succeed()
+    [DataTestMethod]
+    [DynamicData(nameof(TestReceiveOrder))]
+    public async Task TestMakeDishes_Succeed(Customer customer, ICollection<Dishes> food, Address address)
     {
         var sp = Setup([], sc =>
         {
@@ -31,7 +57,7 @@ public class CommandHandlerTests
         Assert.IsNotNull(sp);
 
         var commandBus = sp.GetRequiredService<HeadQuarterCommandBus>();
-        var command = new MakeDishes(new MakeDishedData());
+        var command = new MakeDishes(new MakeDishedData(customer, food));
         var ret = await commandBus.Execute(command).ConfigureAwait(false);
         Assert.IsTrue(ret);
 
@@ -40,8 +66,9 @@ public class CommandHandlerTests
         Assert.IsNotNull(msg);
     }
 
-    [TestMethod]
-    public async Task TestDeliverDishes_Succeed()
+    [DataTestMethod]
+    [DynamicData(nameof(TestReceiveOrder))]
+    public async Task TestDeliverDishes_Succeed(Customer customer, ICollection<Dishes> food, Address address)
     {
         var sp = Setup([], sc =>
         {
@@ -50,7 +77,7 @@ public class CommandHandlerTests
         Assert.IsNotNull(sp);
         
         var commandBus = sp.GetRequiredService<HeadQuarterCommandBus>();
-        var command = new DeliverDishes(new DeliverDishesData());
+        var command = new DeliverDishes(new DeliverDishesData(customer, address));
         var ret = await commandBus.Execute(command).ConfigureAwait(false);
         Assert.IsTrue(ret);
 

@@ -23,9 +23,7 @@ public interface ICommandHandler<in TCommand> where TCommand : IDemoCommand
 ## Command Bus
 
 Instead of introduce one more 3rd part library (e.g., MediatR) to scan the code (via reflection) to match command type to command handler.
-
 We simplify to use `(dynamic)` to do a runtime dispatch.  
-
 In real production code, we should consider `MediatR`
 
 ```C#

@@ -167,6 +167,10 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\Domain\Delivery\Delivery.Manager\Delivery.Manager.csproj">
+        <Project>{980889f6-8322-4b40-9489-47cf92a89810}</Project>
+        <Name>Delivery.Manager</Name>
+      </ProjectReference>
       <ProjectReference Include="..\Domain\HeadQuarter\HeadQuarter.Manager\HeadQuarter.Manager.csproj">
         <Project>{082c67fc-44f5-4285-95ee-566a875bb707}</Project>
         <Name>HeadQuarter.Manager</Name>
@@ -174,6 +178,10 @@
       <ProjectReference Include="..\Domain\Ordering\Ordering.Manager\Ordering.Manager.csproj">
         <Project>{080f9c0f-efd1-450c-b418-bbd8b668a70f}</Project>
         <Name>Ordering.Manager</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Domain\Workshop\Workshop.Manager\Workshop.Manager.csproj">
+        <Project>{6fa45575-5141-4449-9c8b-61a07bd7064a}</Project>
+        <Name>Workshop.Manager</Name>
       </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>

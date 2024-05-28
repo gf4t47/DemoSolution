@@ -43,7 +43,9 @@
     <ItemGroup>
         <Compile Include="MessageChannelMap.cs" />
         <Compile Include="BackgroundLongRunner.cs" />
+        <Compile Include="Message\DeliveryCompleted.cs" />
         <Compile Include="Message\DeliveryScheduled.cs" />
+        <Compile Include="Message\DishesReady.cs" />
         <Compile Include="Message\DishesScheduled.cs" />
         <Compile Include="Message\OrderApproved.cs" />
         <Compile Include="Model\Address.cs" />

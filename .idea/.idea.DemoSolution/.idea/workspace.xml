@@ -8,11 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa2bc269-a7e6-49a7-8b53-c0d3c32b5b12" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DemoSolution/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DemoSolution/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DemoSolution/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DemoSolution/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DemoSolution.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DemoSolution/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DemoSolution/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/Domain/Domain.Contracts/BackgroundLongRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Src/Domain/Domain.Contracts/BackgroundLongRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/Domain/HeadQuarter/HeadQuarter.Manager/OrderingListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Src/Domain/HeadQuarter/HeadQuarter.Manager/OrderingListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/Domain/Ordering/Ordering.Manager/OrderingHostService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Src/Domain/Ordering/Ordering.Manager/OrderingHostService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,32 +57,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.HeadQuarter.Console.executor": "Run",
-    "21ebdc56-f806-4ba1-9b8c-0d80f3652b95.executor": "Debug",
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.environmentSetup",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.HeadQuarter.Console.executor&quot;: &quot;Run&quot;,
+    &quot;21ebdc56-f806-4ba1-9b8c-0d80f3652b95.executor&quot;: &quot;Debug&quot;,
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.environmentSetup&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\gf4t4\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\gf4t4\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\gf4t4\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\gf4t4\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\gf4t4\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\gf4t4\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
-  <component name="RunManager" selected=".NET Project.HeadQuarter.Console">
+}</component>
+  <component name="RunManager">
     <configuration name="HeadQuarter.Console" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Src/HeadQuarter.Console/bin/Debug/HeadQuarter.Console.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -102,9 +101,6 @@
         <option name="Build" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue=".NET Project.HeadQuarter.Console" />
-    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -143,7 +139,7 @@
       <workItem from="1716779904449" duration="5402000" />
       <workItem from="1716786504699" duration="3215000" />
       <workItem from="1716832497394" duration="267000" />
-      <workItem from="1716833912141" duration="17796000" />
+      <workItem from="1716833912141" duration="18300000" />
     </task>
     <servers />
   </component>

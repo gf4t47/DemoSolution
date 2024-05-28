@@ -14,6 +14,10 @@
 1. Received from [Ordering Component](./Sub-Component%20Ordering.md).
 2. `CommandBus.Execute(`[`MakeDishesCommand`](###deliver-dishes-command)`)`
 3. `CommandBus.Execute(`[`DeliverDishesCommand`](###deliver-dishes-command)`)`
+### Delivery Completed Message
+
+1. Received from [Delivery Component](./Sub-Component%20Delivery)
+2. Print message that one order is completed
 ## Send Message
 ### Dishes Scheduled Message
 

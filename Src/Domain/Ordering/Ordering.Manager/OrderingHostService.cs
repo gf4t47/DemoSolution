@@ -33,7 +33,7 @@ public class OrderingHostService(OrderingCommandBus commandBus) : BackgroundLong
                 var order = new VerifyData(customer, dishes, address);
                 yield return new AcceptOrder(order);                
             }
-
+            
             {
                 var address = new Address("deep deep sea", "Park", "BL", 12345);
                 var customer = new Customer(3, "Test3", address);
@@ -46,7 +46,7 @@ public class OrderingHostService(OrderingCommandBus commandBus) : BackgroundLong
     }
 
 
-    protected override async Task<bool> DoOnce(int jobCounter)
+    protected override async Task<bool> DoOnce(long jobCounter)
     {
         if (jobCounter == 0)
         {

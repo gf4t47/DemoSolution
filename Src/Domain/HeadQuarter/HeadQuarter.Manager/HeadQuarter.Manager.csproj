@@ -94,6 +94,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Configuration.cs" />
+        <Compile Include="DeliveryListener.cs" />
         <Compile Include="Handler\DeliverDishesHandler.cs" />
         <Compile Include="Handler\MakeDishesHandler.cs" />
         <Compile Include="HeadQuarterCommandBus.cs" />

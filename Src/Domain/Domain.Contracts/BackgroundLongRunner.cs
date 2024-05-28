@@ -22,16 +22,18 @@ public abstract class BackgroundLongRunner(TimeSpan waitTimeWhenNoJob)
 
     private async Task DoWork(CancellationToken cancellationToken)
     {
-        var count = 0;
+        long count = 0;
         while (!cancellationToken.IsCancellationRequested)
         {
-            var doneOnce = await this.DoOnce(count++).ConfigureAwait(false);
+            var doneOnce = await this.DoOnce(count).ConfigureAwait(false);
             if (!doneOnce)
             {
                 await Task.Delay(this.WaitTimeWhenNoJob, cancellationToken).ConfigureAwait(false);                
             }
+            
+            count = (count + 1) % long.MaxValue;
         }
     }
 
-    protected abstract Task<bool> DoOnce(int jobCounter);
+    protected abstract Task<bool> DoOnce(long jobCounter);
 }

@@ -41,6 +41,12 @@ public static class Configuration
             sc.Configure<MessageChannel>(name, opt => opt.Topic = channel);
             sc.AddTransient<IMessageSender<DeliveryScheduled>, MemoryQueueSender<DeliveryScheduled>>();
         }
+
+        {
+            var (name, channel) = typeof(DeliveryCompleted).ResolveMessageChannel();
+            sc.Configure<MessageChannel>(name, opt => opt.Topic = channel);
+            sc.AddTransient<IMessageQuerier<DeliveryCompleted>, MemoryQueueQuerier<DeliveryCompleted>>();
+        }
  
 
         return sc;
@@ -49,6 +55,7 @@ public static class Configuration
     public static IServiceCollection ConfigHeadQuarterHostService(this IServiceCollection sc)
     {
         sc.AddHostedService<OrderingListener>();
+        sc.AddHostedService<DeliveryListener>();
         return sc;
     }
 }

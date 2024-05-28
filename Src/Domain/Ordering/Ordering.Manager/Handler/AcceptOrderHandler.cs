@@ -19,7 +19,7 @@ public class AcceptOrderHandler(IMessageSender<OrderApproved> sender) : ICommand
         var msg = new OrderApprovedMessage(payload);
         var response = await this.Sender.Publish(msg).ConfigureAwait(false);
         
-        Console.WriteLine($"{this.GetType().Name} sent: customer{payload.Customer.Id}, [{string.Join(",", payload.Food)}], {payload.DeliveryAddress}");
+        Console.WriteLine($"{this.GetType().FullName} sent: {payload.Customer.FullName}@{payload.Customer.Id}, [{string.Join(",", payload.Food)}], {payload.DeliveryAddress}");
         return response.Type == ResponseType.Ack;
     }
 }

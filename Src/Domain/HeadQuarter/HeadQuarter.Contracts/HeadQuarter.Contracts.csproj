@@ -50,6 +50,10 @@
         <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
         <Name>Core.Contracts</Name>
       </ProjectReference>
+      <ProjectReference Include="..\..\Domain.Contracts\Domain.Contracts.csproj">
+        <Project>{48a91882-ab1a-4683-aee0-74cb903292f2}</Project>
+        <Name>Domain.Contracts</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
