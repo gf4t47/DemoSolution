@@ -6,6 +6,8 @@ using Core.Command;
 using Domain;
 using Domain.Message;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Model;
+using Persistence;
 using Workshop.Command;
 using Workshop.Handler;
 public static class Configuration
@@ -34,6 +36,12 @@ public static class Configuration
             sc.AddTransient<IMessageSender<DishesReady>, MemoryQueueSender<DishesReady>>();            
         }
 
+        return sc;
+    }
+
+    public static IServiceCollection ConfigWorkshopPersistence(this IServiceCollection sc)
+    {
+        sc.AddSingleton<IRepository<Order>, MemoryRepository<Order>>();
         return sc;
     }
     

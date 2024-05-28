@@ -4,8 +4,9 @@ namespace Domain.Message;
 using System.Collections.Generic;
 using Domain.Model;
 
-public record DishesScheduled(Customer Customer, ICollection<Dishes> Food)
+public record DishesScheduled(int OrderId, Customer Customer, ICollection<Dishes> Food)
 {
+    public int OrderId { get; } = OrderId;
     public Customer Customer { get; } = Customer;
     public ICollection<Dishes> Food { get; } = Food;
 }

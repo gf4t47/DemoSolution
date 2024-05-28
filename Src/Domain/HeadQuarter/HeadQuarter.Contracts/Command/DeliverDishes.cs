@@ -4,8 +4,9 @@ namespace HeadQuarter.Command;
 using Core.Command;
 using Domain.Model;
 
-public record DeliverDishesData(Customer Customer, Address DeliveryAddress)
+public record DeliverDishesData(int OrderId, Customer Customer, Address DeliveryAddress)
 {
+    public int OrderId { get; } = OrderId;
     public Customer Customer { get; } = Customer;
     public Address DeliveryAddress { get; } = DeliveryAddress;
 }

@@ -8,18 +8,34 @@ using Core.Command;
 using Delivery.Command;
 using Delivery.Message;
 using Domain.Message;
-public class MakeDeliveryHandler(IMessageSender<DeliveryCompleted> headQuarterSender) : ICommandHandler<MakeDelivery>
+using Domain.Model;
+using Ordering.Model;
+using Persistence;
+public class MakeDeliveryHandler(IMessageSender<DeliveryCompleted> headQuarterSender, IRepository<Order> orderRepo) : ICommandHandler<MakeDelivery>
 {
     private IMessageSender<DeliveryCompleted> HeadQuarterSender { get; } = headQuarterSender;
+    
+    private IRepository<Order> OrderRepo { get; } = orderRepo;
 
     public async Task<bool> Process(MakeDelivery command)
     {
         var data = command.Data;
-        var payload = new DeliveryCompleted(data.Customer, data.DeliveryAddress);
+        var address = await this.UpdateEntity(data.OrderId).ConfigureAwait(false);
+        
+        var payload = new DeliveryCompleted(data.OrderId, data.Customer, address);
         var msg = new DeliveryCompletedMessage(payload);
         var response = await this.HeadQuarterSender.Publish(msg).ConfigureAwait(false);
 
-        Console.WriteLine($"{this.GetType().FullName} sent: {payload.Customer.FullName}@{payload.Customer.Id} => Todo, read address from Repo");        
+        Console.WriteLine($"{this.GetType().FullName} sent: {payload.Customer.FullName}@{data.OrderId} => {address}");        
         return response.Type == ResponseType.Ack;
+    }
+
+    private async Task<Address> UpdateEntity(int entityId)
+    {
+        var order = await this.OrderRepo.GetById(entityId).ConfigureAwait(false);
+        order.Status = Order.StatusDeliveryCompleted;
+        await this.OrderRepo.Update(order).ConfigureAwait(false);
+
+        return order.DeliveryAddress;
     }
 }

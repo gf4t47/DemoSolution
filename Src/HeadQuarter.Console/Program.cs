@@ -12,6 +12,7 @@ internal abstract class Program
     {
         sc.ConfigHeadQuarterCommandHandler();
         sc.ConfigHeadQuarterCommunication();
+        sc.ConfigHeadQuarterPersistence();
         sc.ConfigHeadQuarterHostService();
 
         return sc;
@@ -32,6 +33,7 @@ internal abstract class Program
     {
         sc.ConfigDeliveryCommandHandler();
         sc.ConfigDeliveryCommunication();
+        sc.ConfigOrderingPersistence();
         sc.ConfigDeliveryHostService();
         return sc;
     }
@@ -40,6 +42,7 @@ internal abstract class Program
     {
         sc.ConfigWorkshopCommandHandler();
         sc.ConfigWorkshopCommunication();
+        sc.ConfigOrderingPersistence();
         sc.ConfigWorkshopHostService();
 
         return sc;

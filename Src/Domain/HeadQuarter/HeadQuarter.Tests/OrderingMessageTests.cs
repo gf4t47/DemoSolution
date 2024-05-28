@@ -11,6 +11,8 @@ using Domain.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Ordering.Model;
+using Persistence;
 [TestClass]
 public class OrderingMessageTests
 {
@@ -18,6 +20,7 @@ public class OrderingMessageTests
     {
         sc.ConfigHeadQuarterCommandHandler();
         sc.ConfigHeadQuarterCommunication();
+        sc.ConfigHeadQuarterPersistence();
         postConfig(sc);
 
         return sc.BuildServiceProvider();
@@ -57,7 +60,7 @@ public class OrderingMessageTests
 
         var toSend = new Mock<IMessage<OrderApproved>>();
         toSend.SetupGet(msg => msg.Headers).Returns(new Dictionary<string, string>());
-        toSend.SetupGet(msg => msg.Payload).Returns(new OrderApproved(customer, food, address));
+        toSend.SetupGet(msg => msg.Payload).Returns(new OrderApproved(1, customer, food, address));
         
         var sender = sp.GetRequiredService<IMessageSender<OrderApproved>>();
         var ret = await sender.Publish(toSend.Object).ConfigureAwait(false);
@@ -77,6 +80,10 @@ public class OrderingMessageTests
     [DynamicData(nameof(TestReceiveOrder))]
     public async Task TestReceiveOrderingMessage_ToDishAndDeliveryMessage(Customer customer, ICollection<Dishes> food, Address address)
     {
+        var repo = new Mock<IRepository<Order>>();
+        repo.Setup(r => r.GetById(It.IsAny<int>())).Returns(Task.FromResult(new Order(1, customer, food, new PaymentInfo(), address)));
+        repo.Setup(r => r.Update(It.IsAny<Order>())).Returns(Task.FromResult(true));
+        
         var sp = Setup([], sc =>
         {
             sc.AddTransient<IMessageSender<OrderApproved>, MemoryQueueSender<OrderApproved>>();
@@ -84,11 +91,12 @@ public class OrderingMessageTests
             sc.AddTransient<IMessageQuerier<DeliveryScheduled>, MemoryQueueQuerier<DeliveryScheduled>>();
 
             sc.AddSingleton<OrderingListener>();
+            sc.AddSingleton<IRepository<Order>>(_ => repo.Object);
         });
         
         var toSend = new Mock<IMessage<OrderApproved>>();
         toSend.SetupGet(msg => msg.Headers).Returns(new Dictionary<string, string>());
-        toSend.SetupGet(msg => msg.Payload).Returns(new OrderApproved(customer, food, address));
+        toSend.SetupGet(msg => msg.Payload).Returns(new OrderApproved(1, customer, food, address));
         
         var listener = sp.GetRequiredService<OrderingListener>();
         var cancelTokenSource = new CancellationTokenSource();

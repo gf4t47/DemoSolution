@@ -46,7 +46,7 @@ public class CommandHandlerTests
         {
             foreach (var (customer, food, paymentInfo, address) in Submitted)
             {
-                yield return new AcceptOrder(new VerifyData(customer, food, address));
+                yield return new AcceptOrder(new VerifyData(1, customer, food, address));
                 // yield return new CancelOrder(new CancelData()); // not impl
                 yield return new RejectOrder(new RejectData(1));
                 yield return new SubmitOrder(new SubmitData(customer, food, paymentInfo) { Destination = address });                

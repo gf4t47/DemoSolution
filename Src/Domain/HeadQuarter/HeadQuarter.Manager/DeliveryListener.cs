@@ -17,7 +17,7 @@ public class DeliveryListener(IMessageQuerier<DeliveryCompleted> deliveryReceive
         if (msg is not null)
         {
             var payload = msg.Payload;
-            Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.Customer.Id}, {payload.DeliveryAddress}");
+            Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.OrderId}, {payload.DeliveryAddress}");
             return true;
         }
 

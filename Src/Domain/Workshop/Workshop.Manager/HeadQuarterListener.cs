@@ -19,9 +19,9 @@ public class HeadQuarterListener(IMessageQuerier<DishesScheduled> headQuarterRec
         if (msg is not null)
         {
             var payload = msg.Payload;
-            Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.Customer.Id}, [{string.Join(",", payload.Food)}]");
+            Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.OrderId}, [{string.Join(",", payload.Food)}]");
             
-            var data = new CookingData(payload.Customer, payload.Food);
+            var data = new CookingData(payload.OrderId, payload.Customer, payload.Food);
             var command = new Cooking(data);
             await this.CommandBus.Execute(command).ConfigureAwait(false);
             

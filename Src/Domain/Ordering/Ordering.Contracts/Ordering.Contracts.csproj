@@ -45,7 +45,6 @@
         <Compile Include="Command\RejectOrder.cs" />
         <Compile Include="Command\SubmitOrder.cs" />
         <Compile Include="Command\AcceptOrder.cs" />
-        <Compile Include="Model\Order.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Service\ICalcPriceService.cs" />
         <Compile Include="Service\IPaymentService.cs" />

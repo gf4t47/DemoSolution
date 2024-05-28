@@ -20,9 +20,9 @@ public class HeadQuarterListener(IMessageQuerier<DeliveryScheduled> headQuarterR
         if (msg is not null)
         {
             var payload = msg.Payload;
-            Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.Customer.Id}, {payload.DeliveryAddress}");
+            Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.OrderId}, {payload.DeliveryAddress}");
 
-            var data = new PlanDeliveryData(payload.Customer, payload.DeliveryAddress);
+            var data = new PlanDeliveryData(payload.OrderId, payload.Customer, payload.DeliveryAddress);
             var command = new PlanDelivery(data);
             await this.CommandBus.Execute(command).ConfigureAwait(false);
             

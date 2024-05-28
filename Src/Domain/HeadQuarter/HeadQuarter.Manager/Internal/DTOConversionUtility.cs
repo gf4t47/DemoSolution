@@ -8,11 +8,11 @@ public static class DtoConversionUtility
 {
     public static MakeDishedData ToDishes(this OrderApproved order, IDictionary<string, string> header)
     {
-        return new MakeDishedData(order.Customer, order.Food);
+        return new MakeDishedData(order.OrderId, order.Customer, order.Food);
     }
 
     public static DeliverDishesData ToDelivery(this OrderApproved order, IDictionary<string, string> header)
     {
-        return new DeliverDishesData(order.Customer, order.DeliveryAddress);
+        return new DeliverDishesData(order.OrderId, order.Customer, order.DeliveryAddress);
     }
 }
