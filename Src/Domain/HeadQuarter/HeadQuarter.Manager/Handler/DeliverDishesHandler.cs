@@ -15,11 +15,11 @@ public class DeliverDishesHandler(IMessageSender<DeliveryScheduled> sender) : IC
     public async Task<bool> Process(DeliverDishes command)
     {
         var data = command.Data;
-        var payload = new DeliveryScheduled(data.Customer, data.DeliveryAddress);
+        var payload = new DeliveryScheduled(data.OrderId, data.Customer, data.DeliveryAddress);
         var msg = new DeliveryScheduledMessage(payload);
         var response = await this.Sender.Publish(msg).ConfigureAwait(false);
         
-        Console.WriteLine($"{this.GetType().FullName} sent: {payload.Customer.FullName}@{payload.Customer.Id}, {payload.DeliveryAddress}");
+        Console.WriteLine($"{this.GetType().FullName} sent: {payload.Customer.FullName}@{data.OrderId}, {payload.DeliveryAddress}");
         return response.Type == ResponseType.Ack;
     }
 }

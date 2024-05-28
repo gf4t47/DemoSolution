@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using Core.Command;
 using Domain.Model;
 
-public record MakeDishedData(Customer Customer, ICollection<Dishes> Food)
+public record MakeDishedData(int OrderId, Customer Customer, ICollection<Dishes> Food)
 {
+    public int OrderId { get; } = OrderId;
     public Customer Customer { get; } = Customer;
     public ICollection<Dishes> Food { get; } = Food;
 }

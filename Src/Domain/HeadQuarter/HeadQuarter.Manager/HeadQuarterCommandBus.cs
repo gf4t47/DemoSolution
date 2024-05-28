@@ -27,4 +27,10 @@ public class HeadQuarterCommandBus(IServiceProvider serviceProvider) : ICommandB
         var handler = this.ServiceProvider.GetRequiredService<ICommandHandler<DeliverDishes>>();
         return handler.Process(command);
     }
+
+    private Task<bool> Dispatch(OrderCompleted command)
+    {
+        var handler = this.ServiceProvider.GetRequiredService<ICommandHandler<OrderCompleted>>();
+        return handler.Process(command);
+    }
 }

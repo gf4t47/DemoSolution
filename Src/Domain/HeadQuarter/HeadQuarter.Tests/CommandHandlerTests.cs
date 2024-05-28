@@ -10,7 +10,9 @@ using Domain.Model;
 using HeadQuarter.Command;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using Moq;
+using Ordering.Model;
+using Persistence;
 [TestClass]
 public class CommandHandlerTests
 {
@@ -18,6 +20,7 @@ public class CommandHandlerTests
     {
         sc.ConfigHeadQuarterCommandHandler();
         sc.ConfigHeadQuarterCommunication();
+        sc.ConfigHeadQuarterPersistence();
         postConfig(sc);
 
         return sc.BuildServiceProvider();
@@ -50,14 +53,19 @@ public class CommandHandlerTests
     [DynamicData(nameof(TestReceiveOrder))]
     public async Task TestMakeDishes_Succeed(Customer customer, ICollection<Dishes> food, Address address)
     {
+        var repo = new Mock<IRepository<Order>>();
+        repo.Setup(r => r.GetById(It.IsAny<int>())).Returns(Task.FromResult(new Order(1, customer, food, new PaymentInfo(), address)));
+        repo.Setup(r => r.Update(It.IsAny<Order>())).Returns(Task.FromResult(true));
+        
         var sp = Setup([], sc =>
         {
             sc.AddTransient<IMessageQuerier<DishesScheduled>, MemoryQueueQuerier<DishesScheduled>>();
+            sc.AddSingleton<IRepository<Order>>(_ => repo.Object);
         });
         Assert.IsNotNull(sp);
 
         var commandBus = sp.GetRequiredService<HeadQuarterCommandBus>();
-        var command = new MakeDishes(new MakeDishedData(customer, food));
+        var command = new MakeDishes(new MakeDishedData(1, customer, food));
         var ret = await commandBus.Execute(command).ConfigureAwait(false);
         Assert.IsTrue(ret);
 
@@ -77,7 +85,7 @@ public class CommandHandlerTests
         Assert.IsNotNull(sp);
         
         var commandBus = sp.GetRequiredService<HeadQuarterCommandBus>();
-        var command = new DeliverDishes(new DeliverDishesData(customer, address));
+        var command = new DeliverDishes(new DeliverDishesData(1, customer, address));
         var ret = await commandBus.Execute(command).ConfigureAwait(false);
         Assert.IsTrue(ret);
 

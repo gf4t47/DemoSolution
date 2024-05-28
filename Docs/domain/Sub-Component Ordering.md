@@ -13,12 +13,14 @@
 ### Accept Order Command
 
 1. Triggered by [`SubmitOrderHandler`](###submit-order-command), in case of payment succeed.
-2. Send queue message [`OrderApproved`](###order-approved-message) to [Head Quarter Component](./Main-Component%20Head-Quarter.md)
+2. Update order status in persistence layer.
+3. Send queue message [`OrderApproved`](###order-approved-message) to [Head Quarter Component](./Main-Component%20Head-Quarter.md)
 
 ### Reject Order Command
 
 1. Triggered by [`SubmitOrderHandler`](###submit-order-command), in case of payment failed.
-2. Notify client (browser, app, etc.) order failed (not implement).
+2. Update order status in persistence layer.
+3. Notify client (browser, app, etc.) order failed (not implement).
 
 ## Send Message
 ### Order Approved Message

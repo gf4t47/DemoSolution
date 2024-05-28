@@ -19,7 +19,7 @@ public class OrderingListener(IMessageQuerier<OrderApproved> orderingReceiver, H
         if (msg is not null)
         {
             var payload = msg.Payload;
-            Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.Customer.Id}, [{string.Join(",", payload.Food)}], {payload.DeliveryAddress}");
+            Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.OrderId}, [{string.Join(",", payload.Food)}], {payload.DeliveryAddress}");
                 
             var dishes = payload.ToDishes(msg.Headers);
             await this.CommandBus.Execute(new MakeDishes(dishes)).ConfigureAwait(false);

@@ -20,9 +20,9 @@ public class WorkshopListener(IMessageQuerier<DishesReady> workshopReceiver, Del
         if (msg is not null)
         {
             var payload = msg.Payload;
-            Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.Customer.Id}, [{string.Join(",", payload.Food)}]");
+            Console.WriteLine($"{this.GetType().FullName} recv: {payload.Customer.FullName}@{payload.OrderId}, [{string.Join(",", payload.Food)}]");
 
-            var data = new MakeDeliveryData(payload.Customer);
+            var data = new MakeDeliveryData(payload.OrderId, payload.Customer, payload.ShopAddress);
             var command = new MakeDelivery(data);
             await this.CommandBus.Execute(command).ConfigureAwait(false);
 

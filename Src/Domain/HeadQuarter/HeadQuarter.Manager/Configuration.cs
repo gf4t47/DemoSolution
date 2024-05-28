@@ -7,15 +7,24 @@ using Domain.Message;
 using HeadQuarter.Command;
 using HeadQuarter.Handler;
 using Microsoft.Extensions.DependencyInjection;
-
+using Ordering.Model;
+using Persistence;
 public static class Configuration
 {
     public static IServiceCollection ConfigHeadQuarterCommandHandler(this IServiceCollection sc)
     {
         sc.AddTransient<ICommandHandler<MakeDishes>, MakeDishesHandler>();
         sc.AddTransient<ICommandHandler<DeliverDishes>, DeliverDishesHandler>();
+        sc.AddTransient<ICommandHandler<OrderCompleted>, OrderCompletedHandler>();
 
         sc.AddSingleton<HeadQuarterCommandBus>();
+
+        return sc;
+    }
+
+    public static IServiceCollection ConfigHeadQuarterPersistence(this IServiceCollection sc)
+    {
+        sc.AddSingleton<IRepository<Order>, MemoryRepository<Order>>();
 
         return sc;
     }

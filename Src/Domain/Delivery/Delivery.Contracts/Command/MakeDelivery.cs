@@ -4,15 +4,12 @@ namespace Delivery.Command;
 using Core.Command;
 using Domain.Model;
 
-/// <summary>
-/// todo: add DeliveryAddress back
-/// </summary>
-/// <param name="DeliveryAddress"></param>
-public record MakeDeliveryData(Customer Customer)
+public record MakeDeliveryData(int OrderId, Customer Customer, Address ShopAddress)
 {
+    public int OrderId { get; } = OrderId;
     public Customer Customer { get;} = Customer;
-    public Address DeliveryAddress { get; }
-
+    
+    public Address ShopAddress { get; } = ShopAddress;
 }
 
 public class MakeDelivery(MakeDeliveryData data) : IDemoCommand<MakeDeliveryData>

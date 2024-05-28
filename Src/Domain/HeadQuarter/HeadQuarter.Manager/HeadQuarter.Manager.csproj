@@ -97,6 +97,7 @@
         <Compile Include="DeliveryListener.cs" />
         <Compile Include="Handler\DeliverDishesHandler.cs" />
         <Compile Include="Handler\MakeDishesHandler.cs" />
+        <Compile Include="Handler\OrderCompletedHandler.cs" />
         <Compile Include="HeadQuarterCommandBus.cs" />
         <Compile Include="Internal\DTOConversionUtility.cs" />
         <Compile Include="OrderingListener.cs" />
@@ -120,6 +121,14 @@
       <ProjectReference Include="..\..\..\Infrastructure\Communication\Communication.Memory\Communication.Memory.csproj">
         <Project>{3da29160-1824-4739-8fda-ceca0d481fe5}</Project>
         <Name>Communication.Memory</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\..\..\Infrastructure\Persistence\Repository.Contracts\Repository.Contracts.csproj">
+        <Project>{a62340b5-c65d-4f63-acb8-4070b9fd2237}</Project>
+        <Name>Repository.Contracts</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\..\..\Infrastructure\Persistence\Repository.Memory\Repository.Memory.csproj">
+        <Project>{9229fd61-157c-4533-96f4-4b88ac7f1363}</Project>
+        <Name>Repository.Memory</Name>
       </ProjectReference>
       <ProjectReference Include="..\..\Domain.Contracts\Domain.Contracts.csproj">
         <Project>{48a91882-ab1a-4683-aee0-74cb903292f2}</Project>

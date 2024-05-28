@@ -8,6 +8,8 @@ using Delivery.Handler;
 using Domain;
 using Domain.Message;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Model;
+using Persistence;
 public static class Configuration
 {
     public static IServiceCollection ConfigDeliveryCommandHandler(this IServiceCollection sc)
@@ -41,6 +43,13 @@ public static class Configuration
             sc.AddTransient<IMessageSender<DeliveryCompleted>, MemoryQueueSender<DeliveryCompleted>>();
         }
         
+        return sc;
+    }
+
+    private static IServiceCollection ConfigDeliveryPersistence(this IServiceCollection sc)
+    {
+        sc.AddSingleton<IRepository<Order>, MemoryRepository<Order>>();
+
         return sc;
     }
     

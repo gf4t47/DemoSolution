@@ -7,6 +7,7 @@
 
 1. Triggered by [Dishes Ready](###deshes-ready-message) message.
 2. Send queue message [Delivery Completed](###delivery-completed-message) to [Head Quarter](./Main-Component%20Head-Quarter.md).
+3. Update order status in persistence layer.
 ## Receive Message
 ### Delivery Scheduled Message
 

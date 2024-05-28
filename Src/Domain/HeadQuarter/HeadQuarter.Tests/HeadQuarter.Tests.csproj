@@ -144,6 +144,10 @@
         <Project>{75c2dfc1-c298-4199-8254-3d41f91ae5c4}</Project>
         <Name>Core.Contracts</Name>
       </ProjectReference>
+      <ProjectReference Include="..\..\..\Infrastructure\Persistence\Repository.Contracts\Repository.Contracts.csproj">
+        <Project>{a62340b5-c65d-4f63-acb8-4070b9fd2237}</Project>
+        <Name>Repository.Contracts</Name>
+      </ProjectReference>
       <ProjectReference Include="..\HeadQuarter.Contracts\HeadQuarter.Contracts.csproj">
         <Project>{e4526dbc-a9e2-48bb-ae9d-ec09a9f8874a}</Project>
         <Name>HeadQuarter.Contracts</Name>

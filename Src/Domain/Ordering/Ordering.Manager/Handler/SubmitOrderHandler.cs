@@ -58,7 +58,7 @@ public class SubmitOrderHandler(OrderingCommandBus commandBus,
 
     private async Task<bool> ApprovePayment(Order order)
     {
-        var accept = new VerifyData(order.Customer, order.Food, order.DeliveryAddress);
+        var accept = new VerifyData(order.Id, order.Customer, order.Food, order.DeliveryAddress);
         var ret = await this.CommandBus.Execute(new AcceptOrder(accept)).ConfigureAwait(false);
         
         order.Status = Order.StatusApproved;
