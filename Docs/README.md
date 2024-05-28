@@ -2,6 +2,7 @@ The use case will be an Online food ordering company.
 ## Demo
 
 [`HeadQuarter.Console`](../Src/HeadQuarter.Console/Program.cs) is the entry point console executable for demo purpose.
+[OrderingHostService](../Src/Domain/Ordering/Ordering.Manager/OrderingHostService.cs) submits 3 mock orders at the beginning of the program running stage.
 ## Tech Stack
 
 SDK: .NET Framework 4.8.1
@@ -47,19 +48,21 @@ To simplify the use case to achieve MVP asap, here are some constrains:
 - Kitchen facing Service.
 - Take dishes to cook via queue message from **Head Quarter**
 - Update `Order` entity in persistence layer.
+- Send `DishesReady` queue message to `Delivery` component.
 
 ### [Delivery (delivery the food)](./domain/Sub-Component%20Delivery.md)
 
 - Rider facing Service.
-- Take `Workshop`  location via queue message from **Head Quarter** as source.
-- Take `Delivery Address` location via queue message from **Head Quarter** as destination.
+- Take `Workshop`  location via queue message from **Workshop** as source.
+- Take `Delivery Address` location from **Persistence Layer** as destination.
 - Update `Order` entity status in persistence layer.
+- Send `DeliveryCompleted` queue message to `HeadQuarter` component.
 
 ## System Overview
 
 ### Inside a component
 
-Inside one component, use [`command` <=> `command handler` pattern](./core/Command%20Handler%20Pattern.md) to achieve main logic flow.
+Inside one component, use [`command` and `command-handler` pattern](./core/Command%20Handler%20Pattern.md) to achieve main logic flow.
 ### Cross components
 
 Cross components, rely on queue message as main [Communication](./infrastructure/Communication.md) methodology.
