@@ -16,6 +16,6 @@ public class MockPaymentService : IPaymentService
     public Task<bool> Pay(int amount, PaymentInfo paymentInfo)
     {
         var num = this.Generator.Next(0 ,100);
-        return Task.FromResult(num <= 80);
+        return Task.FromResult(num <= 100);
     }
 }

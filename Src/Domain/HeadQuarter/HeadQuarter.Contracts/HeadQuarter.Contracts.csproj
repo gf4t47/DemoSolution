@@ -43,6 +43,7 @@
     <ItemGroup>
         <Compile Include="Command\DeliverDishes.cs" />
         <Compile Include="Command\MakeDishes.cs" />
+        <Compile Include="Command\OrderCompleted.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>

@@ -15,6 +15,7 @@ public static class Configuration
     {
         sc.AddTransient<ICommandHandler<MakeDishes>, MakeDishesHandler>();
         sc.AddTransient<ICommandHandler<DeliverDishes>, DeliverDishesHandler>();
+        sc.AddTransient<ICommandHandler<OrderCompleted>, OrderCompletedHandler>();
 
         sc.AddSingleton<HeadQuarterCommandBus>();
 

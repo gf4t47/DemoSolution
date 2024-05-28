@@ -21,6 +21,8 @@ public class Order(int id, Customer customer, ICollection<Dishes> food, PaymentI
     public const string StatusDishesReady = nameof(StatusDishesReady);
 
     public const string StatusDeliveryCompleted = nameof(StatusDeliveryCompleted);
+
+    public const string StatusCompleted = nameof(StatusCompleted);
     
     public int Id { get; } = id;
     
