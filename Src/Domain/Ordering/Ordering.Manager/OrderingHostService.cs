@@ -46,7 +46,7 @@ public class OrderingHostService(OrderingCommandBus commandBus) : BackgroundLong
     }
 
 
-    protected override async Task<bool> DoOnce(int jobCounter)
+    protected override async Task<bool> DoOnce(long jobCounter)
     {
         if (jobCounter == 0)
         {

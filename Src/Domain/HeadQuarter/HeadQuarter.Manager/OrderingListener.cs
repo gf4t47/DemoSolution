@@ -13,13 +13,13 @@ public class OrderingListener(IMessageQuerier<OrderApproved> orderingReceiver, H
     private IMessageQuerier<OrderApproved> OrderingReceiver { get; } = orderingReceiver;
     private HeadQuarterCommandBus CommandBus { get; } = commandBus;
 
-    protected override async Task<bool> DoOnce(int jobCounter)
+    protected override async Task<bool> DoOnce(long jobCounter)
     {
         var msg = await this.OrderingReceiver.Receive().ConfigureAwait(false);
         if (msg is not null)
         {
             var payload = msg.Payload;
-            Console.WriteLine($"{this.GetType().Name} recv: customer{payload.Customer.Id}, [{string.Join(",", payload.Food)}], {payload.DeliveryAddress}");
+            Console.WriteLine($"{this.GetType().Name} recv: {payload.Customer.FullName}@{payload.Customer.Id}, [{string.Join(",", payload.Food)}], {payload.DeliveryAddress}");
                 
             var dishes = payload.ToDishes(msg.Headers);
             await this.CommandBus.Execute(new MakeDishes(dishes)).ConfigureAwait(false);

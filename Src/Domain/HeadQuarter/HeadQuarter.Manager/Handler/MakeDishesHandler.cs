@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Demo.
 namespace HeadQuarter.Handler;
 
+using System;
 using System.Threading.Tasks;
 using Communication;
 using Core.Command;
@@ -13,9 +14,12 @@ public class MakeDishesHandler(IMessageSender<DishesScheduled> sender) : IComman
     
     public async Task<bool> Process(MakeDishes command)
     {
-        var payload = new DishesScheduled();
+        var data = command.Data;
+        var payload = new DishesScheduled(data.Customer, data.Food);
         var msg = new DishesScheduledMessage(payload);
         var response = await this.Sender.Publish(msg).ConfigureAwait(false);
+        
+        Console.WriteLine($"{this.GetType().Name} sent: {payload.Customer.FullName}@{payload.Customer.Id}, [{string.Join(",", payload.Food)}]");
         return response.Type == ResponseType.Ack;
     }
 }
