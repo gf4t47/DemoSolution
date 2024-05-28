@@ -47,7 +47,7 @@ internal abstract class Program
     
     public static async Task Main(string[] args)
     {
-        var hostBuilder = Host.CreateDefaultBuilder().ConfigureServices((hostContext, services) =>
+        var hostBuilder = Host.CreateDefaultBuilder().ConfigureServices((_, services) =>
         {
             ConfigHeadQuarter(services);
             ConfigOrdering(services);
