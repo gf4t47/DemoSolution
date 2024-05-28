@@ -25,11 +25,13 @@ public abstract class BackgroundLongRunner(TimeSpan waitTimeWhenNoJob)
         long count = 0;
         while (!cancellationToken.IsCancellationRequested)
         {
-            var doneOnce = await this.DoOnce(count++ % long.MaxValue).ConfigureAwait(false);
+            var doneOnce = await this.DoOnce(count).ConfigureAwait(false);
             if (!doneOnce)
             {
                 await Task.Delay(this.WaitTimeWhenNoJob, cancellationToken).ConfigureAwait(false);                
             }
+            
+            count = (count + 1) % long.MaxValue;
         }
     }
 

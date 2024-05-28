@@ -1,9 +1,11 @@
 ﻿namespace HeadQuarter;
 
 using System.Threading.Tasks;
+using Delivery;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ordering;
+using Workshop;
 internal abstract class Program
 {
     private static IServiceCollection ConfigHeadQuarter(IServiceCollection sc)
@@ -25,6 +27,21 @@ internal abstract class Program
 
         return sc;
     }
+
+    private static IServiceCollection ConfigDelivery(IServiceCollection sc)
+    {
+        sc.ConfigDeliveryCommunication();
+        sc.ConfigDeliveryHostService();
+        return sc;
+    }
+
+    private static IServiceCollection ConfigWorkshop(IServiceCollection sc)
+    {
+        sc.ConfigWorkshopCommunication();
+        sc.ConfigWorkshopHostService();
+
+        return sc;
+    }
     
     public static async Task Main(string[] args)
     {
@@ -32,6 +49,8 @@ internal abstract class Program
         {
             ConfigHeadQuarter(services);
             ConfigOrdering(services);
+            ConfigDelivery(services);
+            ConfigWorkshop(services);
         });
 
         await hostBuilder.RunConsoleAsync().ConfigureAwait(false);

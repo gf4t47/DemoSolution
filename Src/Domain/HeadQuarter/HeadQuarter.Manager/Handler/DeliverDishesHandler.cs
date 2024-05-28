@@ -19,7 +19,7 @@ public class DeliverDishesHandler(IMessageSender<DeliveryScheduled> sender) : IC
         var msg = new DeliveryScheduledMessage(payload);
         var response = await this.Sender.Publish(msg).ConfigureAwait(false);
         
-        Console.WriteLine($"{this.GetType().Name} sent: {payload.Customer.FullName}@{payload.Customer.Id}, {payload.DeliveryAddress}");
+        Console.WriteLine($"{this.GetType().FullName} sent: {payload.Customer.FullName}@{payload.Customer.Id}, {payload.DeliveryAddress}");
         return response.Type == ResponseType.Ack;
     }
 }

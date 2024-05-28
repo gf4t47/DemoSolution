@@ -19,7 +19,7 @@ public class MakeDishesHandler(IMessageSender<DishesScheduled> sender) : IComman
         var msg = new DishesScheduledMessage(payload);
         var response = await this.Sender.Publish(msg).ConfigureAwait(false);
         
-        Console.WriteLine($"{this.GetType().Name} sent: {payload.Customer.FullName}@{payload.Customer.Id}, [{string.Join(",", payload.Food)}]");
+        Console.WriteLine($"{this.GetType().FullName} sent: {payload.Customer.FullName}@{payload.Customer.Id}, [{string.Join(",", payload.Food)}]");
         return response.Type == ResponseType.Ack;
     }
 }

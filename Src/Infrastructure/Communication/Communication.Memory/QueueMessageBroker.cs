@@ -5,10 +5,6 @@ using TQueueItem = (string, string);
 
 public class QueueMessageBroker
 {
-    public QueueMessageBroker()
-    {
-    }
-
     private ConcurrentDictionary<string, ConcurrentQueue<TQueueItem>> QueueBus { get;} = new ();
 
 
