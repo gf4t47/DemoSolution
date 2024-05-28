@@ -30,6 +30,7 @@ internal abstract class Program
 
     private static IServiceCollection ConfigDelivery(IServiceCollection sc)
     {
+        sc.ConfigDeliveryCommandHandler();
         sc.ConfigDeliveryCommunication();
         sc.ConfigDeliveryHostService();
         return sc;

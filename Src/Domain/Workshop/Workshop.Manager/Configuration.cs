@@ -3,6 +3,7 @@ namespace Workshop;
 
 using Communication;
 using Core.Command;
+using Domain;
 using Domain.Message;
 using Microsoft.Extensions.DependencyInjection;
 using Workshop.Command;
@@ -20,8 +21,18 @@ public static class Configuration
     public static IServiceCollection ConfigWorkshopCommunication(this IServiceCollection sc)
     {
         sc.AddSingleton<QueueMessageBroker>();
-        sc.AddTransient<IMessageQuerier<DishesScheduled>, MemoryQueueQuerier<DishesScheduled>>();
-        sc.AddTransient<IMessageSender<DishesReady>, MemoryQueueSender<DishesReady>>();
+
+        {
+            var (name, channel) = typeof(DishesScheduled).ResolveMessageChannel();
+            sc.Configure<MessageChannel>(name, opt => opt.Topic = channel);
+            sc.AddTransient<IMessageQuerier<DishesScheduled>, MemoryQueueQuerier<DishesScheduled>>();            
+        }
+
+        {
+            var (name, channel) = typeof(DishesReady).ResolveMessageChannel();
+            sc.Configure<MessageChannel>(name, opt => opt.Topic = channel);            
+            sc.AddTransient<IMessageSender<DishesReady>, MemoryQueueSender<DishesReady>>();            
+        }
 
         return sc;
     }

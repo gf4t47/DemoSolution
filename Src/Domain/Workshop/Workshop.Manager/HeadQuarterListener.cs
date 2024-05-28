@@ -7,15 +7,15 @@ using Domain;
 using Domain.Message;
 using Microsoft.Extensions.Hosting;
 using Workshop.Command;
-public class HeadQuarterListener(IMessageQuerier<DishesScheduled> dishReceiver, WorkshopCommandBus commandBus) : BackgroundLongRunner(TimeSpan.FromSeconds(1)), IHostedService
+public class HeadQuarterListener(IMessageQuerier<DishesScheduled> headQuarterReceiver, WorkshopCommandBus commandBus) : BackgroundLongRunner(TimeSpan.FromSeconds(1)), IHostedService
 {
-    private IMessageQuerier<DishesScheduled> DishReceiver { get; } = dishReceiver;
+    private IMessageQuerier<DishesScheduled> HeadQuarterReceiver { get; } = headQuarterReceiver;
     
     private WorkshopCommandBus CommandBus { get; } = commandBus;
 
     protected override async Task<bool> DoOnce(long jobCounter)
     {
-        var msg = await this.DishReceiver.Receive().ConfigureAwait(false);
+        var msg = await this.HeadQuarterReceiver.Receive().ConfigureAwait(false);
         if (msg is not null)
         {
             var payload = msg.Payload;

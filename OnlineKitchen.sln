@@ -58,6 +58,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.Manager", "Src\Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.Contracts", "Src\Domain\Workshop\Workshop.Contracts\Workshop.Contracts.csproj", "{196BAC66-53CE-4489-AC21-3A5F57E4A679}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delivery.Contracts", "Src\Domain\Delivery\Delivery.Contracts\Delivery.Contracts.csproj", "{EECE6BA9-DE3B-4F49-B14D-70C7534D0330}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -144,6 +146,10 @@ Global
 		{196BAC66-53CE-4489-AC21-3A5F57E4A679}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{196BAC66-53CE-4489-AC21-3A5F57E4A679}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{196BAC66-53CE-4489-AC21-3A5F57E4A679}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EECE6BA9-DE3B-4F49-B14D-70C7534D0330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EECE6BA9-DE3B-4F49-B14D-70C7534D0330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EECE6BA9-DE3B-4F49-B14D-70C7534D0330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EECE6BA9-DE3B-4F49-B14D-70C7534D0330}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A62340B5-C65D-4F63-ACB8-4070B9FD2237} = {53362055-041B-4898-8C3D-2BFF48961AD3}
@@ -171,5 +177,6 @@ Global
 		{980889F6-8322-4B40-9489-47CF92A89810} = {344D9A1E-7452-478A-830D-49E8EFC2D134}
 		{6FA45575-5141-4449-9C8B-61A07BD7064A} = {DE0C3C08-8493-49D2-BBBD-F43DCE74E93E}
 		{196BAC66-53CE-4489-AC21-3A5F57E4A679} = {DE0C3C08-8493-49D2-BBBD-F43DCE74E93E}
+		{EECE6BA9-DE3B-4F49-B14D-70C7534D0330} = {344D9A1E-7452-478A-830D-49E8EFC2D134}
 	EndGlobalSection
 EndGlobal
