@@ -1,23 +1,22 @@
-- Add a abstract async communication layer first,
+## Communication Layer
+
+- Add a abstract async communication layer first.
 - First Implement an in-memory `ConcurrentQueue` to achieve a MVP asap.
 - Would consider `RabbitMQ` if have more time work on it. 
-
 ### Message Publisher
-```C#
-public interface IMessageQuerier<T>  
-{  
-    Task<IMessage<T>?> Receive();  
-}
-```
-
-### Message Receiver
 ```C#
 public interface IMessageSender<in T>  
 {  
     Task<PublishResponse> Publish(IMessage<T> message);  
 }
 ```
-
+### Message Receiver
+```C#
+public interface IMessageQuerier<T>  
+{  
+    Task<IMessage<T>?> Receive();  
+}
+```
 ### Message Subscriber
 - An option for continuous streaming of data.
 - Make an `IHostedService` to continue running in backend to poll message from queue.
