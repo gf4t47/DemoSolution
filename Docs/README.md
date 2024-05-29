@@ -1,7 +1,8 @@
-The use case will be an Online food ordering company.
+**The use case will be an Online food ordering company.**
 ## Demo
 
 [`HeadQuarter.Console`](../Src/HeadQuarter.Console/Program.cs) is the entry point console executable for demo purpose.
+
 [`OrderingHostService`](../Src/Domain/Ordering/Ordering.Manager/OrderingHostService.cs) submits 3 mock orders at the beginning of the program running stage.
 ## Tech Stack
 
@@ -62,7 +63,7 @@ To simplify the use case to achieve MVP asap, here are some constrains:
 
 ### Inside a component
 
-Inside one component, use [`command` and `command-handler` pattern](./core/Command%20Handler%20Pattern.md) to achieve main logic flow.
+Inside one component, use [`command handler pattern`](./core/Command%20Handler%20Pattern.md) to achieve main logic flow.
 ### Cross components
 
 Cross components, rely on queue message as main [Communication](./infrastructure/Communication.md) methodology.

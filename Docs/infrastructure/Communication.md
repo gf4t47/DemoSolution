@@ -20,7 +20,7 @@ public interface IMessageSender<in T>
 
 ### Message Subscriber
 - An option for continuous streaming of data.
-- Make `IHostedService` to continue running in backend to poll message from queue.
+- Make an `IHostedService` to continue running in backend to poll message from queue.
 
 ```C#
 public abstract class BackgroundLongRunner(TimeSpan waitTimeWhenNoJob)  
