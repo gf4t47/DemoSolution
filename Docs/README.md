@@ -67,3 +67,7 @@ Inside one component, use [`command handler pattern`](./core/Command%20Handler%2
 ### Cross components
 
 Cross components, rely on queue message as main [Communication](./infrastructure/Communication.md) methodology.
+
+### Persistence Layer
+
+Simplified DDD [`Repository`](./infrastructure/Persistency.md) Pattern
