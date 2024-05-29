@@ -30,11 +30,19 @@ public class CommandHandlerTests
     {
         get
         {
-            var address = new Address("street", "LA", "CA", 91100);
-            var customer = new Customer(1, "Test", address);
-            var dishes = new List<Dishes> { new("Pizza"), new("Noodles")};
-            
-            yield return (customer, dishes, address);
+            {
+                var address = new Address("street", "LA", "CA", 91100);
+                var customer = new Customer(1, "Test", address);
+                var dishes = new List<Dishes> { new("Pizza"), new("Noodles")};
+                yield return (customer, dishes, address);                
+            }
+
+            {
+                var address = new Address("1", "2", "3", 11111);
+                var customer = new Customer(123, "123", address);
+                var dishes = new List<Dishes> { new("Dishes1"), new("Dishes2")};
+                yield return (customer, dishes, address);                
+            }
         }
     }
     

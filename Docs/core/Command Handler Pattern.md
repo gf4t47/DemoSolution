@@ -1,8 +1,10 @@
+## Main Logic Flow
+
 1. Resolve `CommandBus` from DI.
 2. Prepared a `Command` (from queue message or from other request).
 3. `CommandBus.Execute(Command)`
 4. Inside `Execute` method of `CommandBus`, Resolve `CommandHandler`  from DI.
-5. `CommandHandler.Process(Command)`, by define different `handler` we can achieve different logic.
+5. `CommandHandler.Process(Command)`, by implementing different `handler` we can achieve different logic.
 ## Command
 
 ```C#
@@ -24,7 +26,7 @@ public interface ICommandHandler<in TCommand> where TCommand : IDemoCommand
 
 Instead of introduce one more 3rd part library (e.g., MediatR) to scan the code (via reflection) to match command type to command handler.
 We simplify to use `(dynamic)` to do a runtime dispatch.  
-In real production code, we should consider `MediatR`
+In real production code, we should consider some 3rd part library.
 
 ```C#
 public class OrderingCommandBus(IServiceProvider serviceProvider) : ICommandBus  
